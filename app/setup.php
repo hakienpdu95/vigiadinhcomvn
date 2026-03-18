@@ -425,6 +425,23 @@ add_action('admin_enqueue_scripts', function () {
     );
 }, 99);
 
+// === LOCATION HELPER ===
+require_once get_theme_file_path('app/Helpers/LocationHelper.php');
+
+\App\Database\CustomTableManager::register('viet-product', ['province_code', 'ward_code']);
+\App\Database\CustomTableManager::register('viet-heritage', ['province_code', 'ward_code']);
+\App\Database\CustomTableManager::register('viet-travel', ['province_code', 'ward_code']);
+
+// Enqueue script cho cascading select (chỉ admin)
+add_action('admin_enqueue_scripts', function () {
+    if (!get_current_screen()?->is_block_editor() && !is_admin()) return;
+    wp_enqueue_script('location-admin', get_theme_file_uri('resources/js/location-admin.js'), ['jquery'], '1.0', true);
+    wp_localize_script('location-admin', 'locationAjax', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('location_nonce')
+    ]);
+});
+
 // === SEARCH MODULE 11/10 – TỐI ƯU CAO NHẤT ===
 require_once get_theme_file_path('app/Search/SearchManager.php');
 \App\Search\SearchManager::init();
