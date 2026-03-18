@@ -19,7 +19,7 @@ class SeriesTaxonomy extends BaseTaxonomy
 
     protected function getPostTypes(): array
     {
-        return ['happy-family', 'event'];
+        return ['viet-heritage', 'event'];
     }
 
     protected function getArgs(): array

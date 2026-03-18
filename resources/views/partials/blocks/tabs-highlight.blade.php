@@ -2,8 +2,8 @@
 	<div class="container">
 		<div class="mb-5 flex xl:flex-row flex-col gap-y-3 items-center xl:justify-between border-b-2 border-b-[#d46563] head-tab">
 		    <div class="flex gap-x-0 overflow-x-scroll lg:overflow-x-visible home-one-product-filter max-w-full">
-		        <button data-tab="happy-family" class="btn btn-large py-1 mr-1 px-[12px] btn-primary bg-[#d46563]"> Gia Đình Hạnh Phúc </button>
-		        <button data-tab="family-values" class="btn btn-large py-1 mr-1 px-[12px] btn-default bg-[#ebebeb]"> Đạo Đức & Lối Sống Gia Đình </button>
+		        <button data-tab="viet-heritage" class="btn btn-large py-1 mr-1 px-[12px] btn-primary bg-[#d46563]"> Gia Đình Hạnh Phúc </button>
+		        <button data-tab="viet-product" class="btn btn-large py-1 mr-1 px-[12px] btn-default bg-[#ebebeb]"> Đạo Đức & Lối Sống Gia Đình </button>
 		        <button data-tab="family-policy" class="btn btn-large py-1 px-[12px] btn-default bg-[#ebebeb]"> Tin Chính Sách Gia Đình </button>
 		    </div>
 		</div>
@@ -12,7 +12,7 @@
 		    @php
 			// ================== CONFIG TAXONOMY LINH HOẠT – CHUẨN CHO POST & EVENT ==================
 			$tab_configs = [
-			    'happy-family' => [
+			    'viet-heritage' => [
 			        'slide' => [
 			            'post_type'      => 'event',
 			            'flags'          => ['hot'],
@@ -28,7 +28,7 @@
 			        'link_type' => 'listing'
 			    ],
 
-			    'family-values' => [
+			    'viet-product' => [
 			        'slide' => [
 			            'post_type'      => 'post',                    // CPT post
 			            'flags'          => ['featured'],
@@ -97,9 +97,9 @@
 
 		    <!-- Render các tab -->
 		    @foreach ($tab_data as $tab_id => $data)
-		        <div class="tab-pane {{ $tab_id === 'happy-family' ? 'active' : '' }}" 
+		        <div class="tab-pane {{ $tab_id === 'viet-heritage' ? 'active' : '' }}" 
 		             id="{{ $tab_id }}" 
-		             style="{{ $tab_id === 'happy-family' ? '' : 'display: none;' }}">
+		             style="{{ $tab_id === 'viet-heritage' ? '' : 'display: none;' }}">
 		            
 		            @include('partials.blocks/home-tab-section', [
 		                'slide_posts' => $data['slide_posts'],

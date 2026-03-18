@@ -19,7 +19,7 @@ class GoldenMessagesTaxonomy extends BaseTaxonomy
 
     protected function getPostTypes(): array
     {
-        return ['happy-family', 'family-values'];
+        return ['viet-heritage', 'viet-product'];
     }
 
     protected function getArgs(): array

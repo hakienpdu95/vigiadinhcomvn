@@ -308,13 +308,13 @@ require_once get_theme_file_path('app/Database/CustomTableManager.php');
 \App\Database\CustomTableManager::register('review', [
     '*'
 ]);
-\App\Database\CustomTableManager::register('recipe', [
+\App\Database\CustomTableManager::register('viet-travel', [
     '*'
 ]);
-\App\Database\CustomTableManager::register('happy-family', [
+\App\Database\CustomTableManager::register('viet-heritage', [
     '*'
 ]);
-\App\Database\CustomTableManager::register('family-values', [
+\App\Database\CustomTableManager::register('viet-product', [
     '*'
 ]);
 // \App\Database\CustomTableManager::register('project', ['flags', 'budget', 'deadline', 'project_phase', 'client']);
@@ -443,8 +443,8 @@ require_once get_theme_file_path('app/Queries/MergedPostsQuery.php');
 \App\Queries\MergedPostsQuery::initHomepage(['posts_per_page' => 3]);
 // Archive CPT (thêm bao nhiêu CPT cũng được)
 \App\Queries\MergedPostsQuery::initArchive('event',   ['posts_per_page' => 2]);
-\App\Queries\MergedPostsQuery::initArchive('happy-family',   ['posts_per_page' => 2]);
-\App\Queries\MergedPostsQuery::initArchive('family-values',   ['posts_per_page' => 2]);
+\App\Queries\MergedPostsQuery::initArchive('viet-heritage',   ['posts_per_page' => 2]);
+\App\Queries\MergedPostsQuery::initArchive('viet-product',   ['posts_per_page' => 2]);
 // \App\Queries\MergedPostsQuery::initArchive('project', ['posts_per_page' => 9]);
 // \App\Queries\MergedPostsQuery::initArchive('news',    ['posts_per_page' => 15]);
 

@@ -2,11 +2,11 @@
 
 namespace App\PostTypes;
 
-class HappyFamilyPostType extends BasePostType
+class VietHeritagePostType extends BasePostType
 {
-    protected function getPostTypeKey(): string { return 'happy-family'; }
-    protected function getSingular(): string    { return 'Gia đình hạnh phúc'; }
-    protected function getPlural(): string      { return 'Gia đình hạnh phúc'; }
+    protected function getPostTypeKey(): string { return 'viet-heritage'; }
+    protected function getSingular(): string    { return 'Di sản'; }
+    protected function getPlural(): string      { return 'Di sản'; }
 
     protected function getArgs(): array
     {
