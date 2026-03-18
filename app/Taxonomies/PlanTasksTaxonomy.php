@@ -19,7 +19,7 @@ class PlanTasksTaxonomy extends BaseTaxonomy
 
     protected function getPostTypes(): array
     {
-        return ['happy-family', 'violence-prevention', 'family-values', 'event'];
+        return ['happy-family', 'family-values', 'event'];
     }
 
     protected function getArgs(): array

@@ -4,7 +4,6 @@
 		    <div class="flex gap-x-0 overflow-x-scroll lg:overflow-x-visible home-one-product-filter max-w-full">
 		        <button data-tab="happy-family" class="btn btn-large py-1 mr-1 px-[12px] btn-primary bg-[#d46563]"> Gia Đình Hạnh Phúc </button>
 		        <button data-tab="family-values" class="btn btn-large py-1 mr-1 px-[12px] btn-default bg-[#ebebeb]"> Đạo Đức & Lối Sống Gia Đình </button>
-		        <button data-tab="violence-prevention" class="btn btn-large py-1 mr-1 px-[12px] btn-default bg-[#ebebeb]"> Phòng Chống Bạo Lực Gia Đình </button>
 		        <button data-tab="family-policy" class="btn btn-large py-1 px-[12px] btn-default bg-[#ebebeb]"> Tin Chính Sách Gia Đình </button>
 		    </div>
 		</div>
@@ -54,23 +53,6 @@
 			            'posts_per_page'   => 4,
 			        ],
 			        'link_type' => 'medical'
-			    ],
-
-			    'violence-prevention' => [
-			        'slide' => [
-			            'post_type'        => 'event',
-			            'flags'            => ['first-aid'],
-			            'event-categories' => 'first-aid',             // taxonomy event-categories
-			            'pinned_first'     => true,
-			            'posts_per_page'   => 8,
-			        ],
-			        'grid' => [
-			            'post_type'        => 'event',
-			            'flags'            => ['first-aid', 'hot'],
-			            'event-categories' => 'first-aid',
-			            'posts_per_page'   => 4,
-			        ],
-			        'link_type' => 'first-aid'
 			    ],
 
 			    'family-policy' => [

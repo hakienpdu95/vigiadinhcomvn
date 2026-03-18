@@ -20,7 +20,6 @@ class PlaceholderHandler
         'event' => 'placeholder.png',
         'happy-family' => 'placeholder.png',
         'family-values' => 'placeholder.png',
-        'violence-prevention' => 'placeholder.png',
     ];
 
     /** Cache siêu mạnh (per post & per file) */
