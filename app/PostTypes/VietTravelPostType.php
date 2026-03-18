@@ -16,4 +16,9 @@ class VietTravelPostType extends BasePostType
             'supports'      => ['title', 'editor', 'thumbnail', 'excerpt'],
         ]);
     }
+
+    protected function useDefaultCategory(): bool
+    {
+        return true; 
+    }
 }

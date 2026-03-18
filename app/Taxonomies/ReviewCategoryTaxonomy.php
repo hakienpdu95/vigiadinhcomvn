@@ -1,32 +1,32 @@
 <?php namespace App\Taxonomies;
 
-class GoldenMessagesTaxonomy extends BaseTaxonomy
+class ReviewCategoryTaxonomy extends BaseTaxonomy
 {
     protected function getTaxonomyKey(): string
     {
-        return 'golden-messages';
+        return 'review-category';
     }
 
     protected function getSingular(): string
     {
-        return 'Thông điệp vàng';
+        return 'Danh mục review';
     }
 
     protected function getPlural(): string
     {
-        return 'Thông điệp vàng';
+        return 'Danh mục review';
     }
 
     protected function getPostTypes(): array
     {
-        return ['viet-heritage', 'viet-product'];
+        return ['viet-product'];
     }
 
     protected function getArgs(): array
     {
         $args = parent::getArgs();
         $args['hierarchical'] = true;          
-        $args['rewrite'] = ['slug' => 'thong-diep-vang'];
+        // $args['rewrite'] = ['slug' => 'loai-san-pham'];
         return $args;
     }
 }

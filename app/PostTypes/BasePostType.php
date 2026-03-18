@@ -13,12 +13,28 @@ abstract class BasePostType
         register_post_type($this->getPostTypeKey(), $this->getArgs());
     }
 
+    protected function useDefaultCategory(): bool
+    {
+        return false;
+    }
+
+    protected function getTaxonomies(): array
+    {
+        return [];
+    }
+
     protected function getArgs(): array
     {
+        $taxonomies = $this->getTaxonomies();
+
+        if ($this->useDefaultCategory()) {
+            $taxonomies = array_merge($taxonomies, ['category']);
+        }
+
         return [
             'labels'              => $this->getLabels(),
             'public'              => true,
-            'show_in_rest'        => false,           // Tắt vì dùng Classic Editor
+            'show_in_rest'        => false,
             'has_archive'         => true,
             'rewrite'             => ['slug' => $this->getPostTypeKey()],
             'supports'            => ['title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions', 'page-attributes'],
@@ -27,6 +43,7 @@ abstract class BasePostType
             'capability_type'     => 'post',
             'show_in_admin_bar'   => true,
             'show_in_nav_menus'   => true,
+            'taxonomies'          => $taxonomies,
         ];
     }
 

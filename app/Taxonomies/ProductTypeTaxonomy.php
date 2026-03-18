@@ -1,32 +1,32 @@
 <?php namespace App\Taxonomies;
 
-class TopicTaxonomy extends BaseTaxonomy
+class ProductTypeTaxonomy extends BaseTaxonomy
 {
     protected function getTaxonomyKey(): string
     {
-        return 'topic';
+        return 'product-type';
     }
 
     protected function getSingular(): string
     {
-        return 'Chủ đề';
+        return 'Loại sản phẩm';
     }
 
     protected function getPlural(): string
     {
-        return 'Chủ đề';
+        return 'Loại sản phẩm';
     }
 
     protected function getPostTypes(): array
     {
-        return ['guide'];
+        return ['viet-product'];
     }
 
     protected function getArgs(): array
     {
         $args = parent::getArgs();
-        $args['hierarchical'] = true;           // Cho phép tạo cấp con nếu cần (Ăn dặm → Ăn dặm BLW, Ăn dặm truyền thống...)
-        $args['rewrite'] = ['slug' => 'chu-de'];
+        $args['hierarchical'] = true;          
+        $args['rewrite'] = ['slug' => 'loai-san-pham'];
         return $args;
     }
 }

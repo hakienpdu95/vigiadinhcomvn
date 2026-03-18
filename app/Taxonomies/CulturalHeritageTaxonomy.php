@@ -1,32 +1,32 @@
 <?php namespace App\Taxonomies;
 
-class PlanTasksTaxonomy extends BaseTaxonomy
+class CulturalHeritageTaxonomy extends BaseTaxonomy
 {
     protected function getTaxonomyKey(): string
     {
-        return 'plan-tasks';
+        return 'cultural-heritage';
     }
 
     protected function getSingular(): string
     {
-        return 'Nhiệm vụ kế hoạch';
+        return 'Di sản văn hóa';
     }
 
     protected function getPlural(): string
     {
-        return 'Nhiệm vụ kế hoạch';
+        return 'Di sản văn hóa';
     }
 
     protected function getPostTypes(): array
     {
-        return ['viet-heritage', 'viet-product', 'event'];
+        return ['viet-heritage'];
     }
 
     protected function getArgs(): array
     {
         $args = parent::getArgs();
         $args['hierarchical'] = true;          
-        $args['rewrite'] = ['slug' => 'nhiem-vu-ke-hoach'];
+        $args['rewrite'] = ['slug' => 'di-san-van-hoa'];
         return $args;
     }
 }
