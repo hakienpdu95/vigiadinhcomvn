@@ -16,7 +16,7 @@ class MergedPostsQuery
     /** ====================== INIT ====================== */
     public static function initHomepage(array $config = []): void
     {
-        self::init('homepage', $config + ['post_types' => ['post', 'event', 'viet-heritage', 'viet-product']]);
+        self::init('homepage', $config + ['post_types' => ['post', 'event', 'viet-heritage', 'viet-product', 'viet-travel']]);
     }
 
     public static function initArchive(string $post_type, array $config = []): void
