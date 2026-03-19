@@ -292,6 +292,7 @@ require_once get_theme_file_path('app/Database/CustomTableManager.php');
     'subtitle', 'lead', 'reading_time', 'article_type',
     'flags', 'priority', 'is_pinned', 'pinned_until', 'is_sponsored',
     'custom_author', 'source', 'source_url', 'is_redirect', 'redirect_url', 
+    'province_code', 'ward_code',
     '*'
 ]);
 \App\Database\CustomTableManager::register('event', [
@@ -432,16 +433,6 @@ require_once get_theme_file_path('app/Helpers/LocationHelper.php');
 \App\Database\CustomTableManager::register('viet-heritage', ['province_code', 'ward_code']);
 \App\Database\CustomTableManager::register('viet-travel', ['province_code', 'ward_code']);
 
-// Enqueue script cho cascading select (chỉ admin)
-add_action('admin_enqueue_scripts', function () {
-    if (!get_current_screen()?->is_block_editor() && !is_admin()) return;
-    wp_enqueue_script('location-admin', get_theme_file_uri('resources/js/location-admin.js'), ['jquery'], '1.0', true);
-    wp_localize_script('location-admin', 'locationAjax', [
-        'ajaxurl' => admin_url('admin-ajax.php'),
-        'nonce'   => wp_create_nonce('location_nonce')
-    ]);
-});
-
 // === SEARCH MODULE 11/10 – TỐI ƯU CAO NHẤT ===
 require_once get_theme_file_path('app/Search/SearchManager.php');
 \App\Search\SearchManager::init();
@@ -517,3 +508,45 @@ add_action('wp_head', function () {
     echo '@font-face{font-family:"Roboto";font-style:normal;font-weight:500;src:url('.get_theme_file_uri('public/build/fonts/Roboto-Medium.woff2').') format("woff2");font-display:swap}';
     echo '</style>';
 }, 1);
+
+add_action('admin_enqueue_scripts', function () {
+    $screen = get_current_screen();
+    if (!$screen || !in_array($screen->base, ['post', 'post-new'])) return;
+
+    // Enqueue script
+    wp_enqueue_script(
+        'location-admin',
+        get_theme_file_uri('resources/js/location-admin.js'),
+        ['jquery'],
+        '1.4',
+        true
+    );
+
+    // Luôn localize locationAjax
+    wp_localize_script('location-admin', 'locationAjax', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('location_nonce')
+    ]);
+
+    // Luôn localize locationSaved (trên trang mới thì rỗng)
+    $post_id = (int) ($_GET['post'] ?? 0);
+    wp_localize_script('location-admin', 'locationSaved', [
+        'ward_code' => $post_id ? get_post_meta($post_id, 'ward_code', true) : ''
+    ]);
+});
+
+// === FORCE SAVE ward_code ===
+add_action('rwmb_after_save_post', function ($post_id) {
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Lấy giá trị từ form (có thể là rỗng)
+    $ward_code = isset($_POST['ward_code']) ? sanitize_text_field($_POST['ward_code']) : '';
+
+    // Luôn cập nhật (kể cả rỗng)
+    update_post_meta($post_id, 'ward_code', $ward_code);
+
+    // Debug log (xem kết quả)
+    error_log("=== [FORCE SAVE] ward_code = '" . $ward_code . "' | post_id = {$post_id} ===");
+}, 20);

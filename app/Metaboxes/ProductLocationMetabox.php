@@ -1,9 +1,9 @@
-<?php
+<?php 
 namespace App\Metaboxes;
 
 class ProductLocationMetabox extends BaseMetabox {
     protected string $title = 'Vị trí – Tỉnh & Phường/Xã';
-    protected array $post_types = ['viet-product', 'san_pham_ocop', 'diem_du_lich', 'trung_tam_gioi_thieu'];
+    protected array $post_types = ['post', 'viet-heritage', 'viet-product', 'viet-travel'];
 
     protected function getFields(): array {
         global $wpdb;
@@ -15,19 +15,28 @@ class ProductLocationMetabox extends BaseMetabox {
         }
 
         return [
+            // Tỉnh
             [
                 'name'    => 'Tỉnh/Thành phố',
                 'id'      => 'province_code',
                 'type'    => 'select',
                 'options' => $options,
-                'desc'    => 'Chọn tỉnh để tự động load phường/xã',
+                'desc'    => 'Chọn tỉnh để load phường/xã',
             ],
+            // Hidden field để truyền giá trị cũ sang JS
             [
-                'name'    => 'Phường/Xã',
-                'id'      => 'ward_code',
-                'type'    => 'select',
-                'options' => ['' => 'Chọn phường/xã'],
-                'desc'    => 'Tự động load theo tỉnh',
+                'type' => 'hidden',
+                'id'   => 'ward_code_saved',
+                'std'  => get_post_meta(get_the_ID(), 'ward_code', true),
+            ],
+            // Phường/Xã
+            [
+                'name'       => 'Phường/Xã',
+                'id'         => 'ward_code',
+                'type'       => 'select',
+                'options'    => ['' => 'Chọn phường/xã'],
+                'desc'       => 'Tự động load theo tỉnh',
+                'save_field' => false,
             ],
         ];
     }
