@@ -295,7 +295,6 @@ body {
   color: var(--text-body);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  background: var(--bg-primary);
 
   @include mq-max(xl) {
     font-size: 15px;

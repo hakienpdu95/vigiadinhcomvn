@@ -24,7 +24,14 @@
 
       <main id="main" class="main">
         <div class="container">
-          <div class="max-w-[1060px] mx-auto sm:px-0 px-3 flex items-start justify-between gap-5 flex-col lg:flex-row relative md:pt-8 pt-5">
+          <div class="w-full items-center flex justify-between">
+            @if (has_nav_menu('primary_navigation'))
+            <nav class="main-menu">
+              {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
+            </nav>
+            @endif
+          </div>
+          <div class="max-w-[1110px] mx-auto sm:px-0 px-3 flex items-start justify-between gap-5 flex-col lg:flex-row relative">
 
               <div class="max-w-[740px] w-full">
                   @yield('content')
