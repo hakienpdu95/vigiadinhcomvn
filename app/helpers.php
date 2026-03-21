@@ -471,7 +471,7 @@ if (!function_exists('sage_social_icons')) {
             $thumb_id = get_post_thumbnail_id($post->ID);
 
             $defaults = [
-                'class'    => 'w-full h-full object-cover transition-transform duration-300',
+                'class'    => 'w-full !h-full object-cover transition-transform duration-300',
                 'loading'  => 'lazy',
                 'decoding' => 'async',
                 'alt'      => get_the_title($post),
