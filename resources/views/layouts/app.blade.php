@@ -33,7 +33,7 @@
           </div>
           <div class="max-w-[1110px] mx-auto sm:px-0 px-3 flex items-start justify-between gap-5 flex-col lg:flex-row relative">
 
-              <div class="max-w-[740px] w-full">
+              <div class="max-w-[772px] w-full">
                   @yield('content')
               </div>
 
