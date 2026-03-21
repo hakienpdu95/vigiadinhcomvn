@@ -1,32 +1,47 @@
-<footer id="footer" class="bg-[#6697a1] text-white px-3 py-10 mt-10">
-    <div class="container">
-        <div class="grid grid-cols-12 gap-5">
+<footer id="footer" class=" mt-10">
+    <div class="footer-main bg-[#6697a1] text-white px-3 py-10">
+        <div class="container mx-auto">
+            <div class="grid xl:grid-cols-3 grid-cols-1 gap-6">
 
-            <div class="col-span-12 sm:col-span-4">
-                <h3 class="text-white text-2xl font-semibold tracking-tight mb-4">Vì Gia Đình</h3>
-                <p class="text-sm leading-relaxed mb-8 max-w-md">
-                    Chúng tôi là những bậc phụ huynh bình thường, đang cùng nhau xây dựng và gìn giữ hạnh phúc gia đình. Chúng tôi không phải là chuyên gia, mà chỉ là những người đi sưu tầm, chọn lọc và chia sẻ những bài viết thực tế, hữu ích nhất về mang thai, sinh nở, chăm sóc trẻ sơ sinh, nuôi dạy con cái, cho con bú, tâm lý trẻ em và những khoảnh khắc đẹp trong cuộc sống gia đình.
-                </p>
+                <div class="col-span-1">
+                    <h3 class="text-white text-2xl font-semibold tracking-tight mb-4">Vì Gia Đình</h3>
+                </div>
+
+                <div class="xl:text-center">
+                    <div class="social">
+                        <ul class="social_icons">
+                            <li class="w-socials-item facebook">
+                                <a title="Facebook" href="#" class="sc_facebook" target="_blank" rel="noopener, nofollow"><i class="hgi hgi-stroke hgi-facebook-01"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div>
-                    <span class="uppercase text-xs tracking-[1px] font-medium block mb-3">Follow us</span>
-                    {!! sage_social_icons('social_navigation', 'flex items-center gap-6 text-3xl') !!}
+                    <div class="footer-description text-right">
+                        <p><strong>Cơ quan chủ quản: TẠP CHÍ VIETNAM TRAVEL<br>
+                        (Giấy phép số 256/GP-BTTTT, ngày 26/7/2023)</strong><br>
+                        Chịu trách nhiệm nội dung:&nbsp;<strong>Tổng Biên tập: ThS. Nguyễn Việt Lộc</strong><br>
+                        Trụ sở: Số 946, đường La Thành, phường Giảng Võ, Hà Nội.<br>
+                        VPGD: Số 14 ngách 15/105 Thụy Khuê, phường Tây Hồ, Hà Nội<br>
+                        Văn phòng miền Nam: Số 19, đường Nguyễn Đình Chiểu, phường Sài Gòn, TP.Hồ Chí Minh</p>
+
+                        <p><strong>Giấy phép MXH số 02/GP-BTTTT<br>
+                        Bộ Thông tin &amp; Truyền thông cấp ngày 04/01/2024</strong><br>
+                        Email: <a href="mailto:toasoan@vietnamtravel.org.vn">toasoan@vntravel.org.vn</a><br>
+                        Liên hệ quảng cáo:&nbsp;<strong>0904798099</strong><br>
+                        Ghi rõ nguồn " Vietnam Travel " khi phát hành lại thông tin trên website này.</p>
+                    </div>
                 </div>
             </div>
-
-            {!! sage_footer_column('footer_column_1') !!}
-
-            {!! sage_footer_column('footer_column_2') !!}
-
-            {!! sage_footer_column('footer_column_3') !!}
-
-            {!! sage_footer_column('footer_column_4') !!}
-        </div>
-
-        {{-- BOTTOM BAR --}}
-        <div class="mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-end justify-between gap-4 text-xs">
-            <div>
-                © 2026 vigiadinh.vn - Bản quyền được bảo lưu.
+        </div>        
+    </div>
+    <div class="footer-copyright">
+        <div class="container mx-auto">
+            <div class="text-center my-4">
+                <small class="font-medium text-zinc-600"> ©
+                    <script>document.write(new Date().getFullYear()) </script> Vì Gia đình <span>giữ bản quyền nội dung trên website này.</span>
+                  </small>
             </div>
         </div>
     </div>

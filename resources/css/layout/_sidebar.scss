@@ -1,0 +1,197 @@
+@use '../abstracts' as *;
+
+.widget {
+    clear: both;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 15px
+}
+
+.widget .widget-title {
+    display: block;
+    position: relative;
+    font-size: 18px;
+    line-height: 23px;
+    margin-bottom: 20px;
+    color: #222;
+    font-weight: 700;
+    clear: both
+}
+
+.widget .article-title {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 0;
+    font-weight: 500;
+    line-height: 1.4
+}
+
+.widget .article-title a {
+    color: inherit
+}
+
+.widget .box-title .main-title,.widget .box-title h6,.widget .widget-title .main-title,.widget .widget-title h6 {
+    font-size: inherit;
+    font-weight: 600;
+    position: relative;
+    font-family: var(--heading-font)
+}
+
+.title-box-category,.widget-title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 18px;
+    line-height: 23px;
+    margin-bottom: 20px;
+    color: #222;
+    font-weight: 700;
+    clear: both
+}
+
+.title-box-category .parent-cate {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: var(--heading-font)
+}
+
+.title-box-category .sub-cate {
+    font-size: 13px;
+    line-height: 1.1538461538;
+    font-weight: 400;
+    margin-bottom: 0;
+    text-transform: none;
+    white-space: nowrap;
+    display: inline-block
+}
+
+.title-box-category a,.widget-title a {
+    color: inherit;
+    text-decoration: none;
+    outline: none
+}
+
+.title-box-category .inner-title,.widget-title .inner-title {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap
+}
+
+
+@media screen and (max-width: 991px) {
+    .title-box-category,.widget-title {
+        font-size:18px
+    }
+}
+
+.title-box-category .parent-cate.has-icon,.widget-title .parent-cate.has-icon {
+    display: flex;
+    align-items: center
+}
+
+.title-box-category .parent-cate.has-icon .inner-title,.widget-title .parent-cate.has-icon .inner-title {
+    padding: 0
+}
+
+.title-box-category .parent-cate.has-icon .inner-title:before,.widget-title .parent-cate.has-icon .inner-title:before {
+    content: none!important
+}
+
+.title-box-category .title-icon,.widget-title .title-icon {
+    width: 24px;
+    height: auto;
+    display: inline-block;
+    margin-right: 5px
+}
+
+.title-box-category.title-full-bg,.widget-title.title-full-bg {
+    background: var(--main-color);
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    border-left: 4px solid var(--color-secondary)
+}
+
+.title-box-category.title-full-bg .inner-title:before,.widget-title.title-full-bg .inner-title:before {
+    content: none
+}
+
+@media screen and (max-width: 767px) {
+    .title-box-category:not([class*=style_]) .inner-title:before,.widget-title:not([class*=style_]) .inner-title:before {
+        content:"";
+        width: 100%;
+        height: 2px;
+        background: var(--main-color);
+        position: absolute;
+        left: 0;
+        bottom: -5px
+    }
+}
+
+.widget-posts.type-2 .widget-content {
+    border: 1px dotted var(--main-color);
+    border-top: 0;
+    border-right: 0;
+    border-radius: 0 0 0 30px;
+    padding: 0 16px 16px
+}
+
+.widget-posts.type-2 .widget-content .item {
+    position: relative
+}
+
+.widget-posts.type-2 .widget-content .item:before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    left: -20px;
+    top: 6px;
+    position: absolute;
+    display: block;
+    background-color: var(--main-color)
+}
+
+.widget-posts.type-2 .widget-content .item .info-wrapper {
+    order: 0;
+    margin-right: 1rem
+}
+
+.widget-posts.type-2 .widget-content .item .info-wrapper .article-title {
+    -webkit-line-clamp: 3
+}
+
+.widget-posts.type-2 .widget-content .item .image-wrapper {
+    order: 1;
+    margin-right: 0!important;
+    min-width: 120px;
+    width: 120px
+}
+
+.style_img_left {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.clamp-2-lines {
+    -webkit-line-clamp: 2
+}
+
+.clamp-2-lines,.clamp-3-lines {
+    overflow: hidden;
+    display: -webkit-box!important;
+    -webkit-box-orient: vertical
+}
+
+.clamp-3-lines {
+    -webkit-line-clamp: 3
+}
+
+.clamp-4-lines {
+    overflow: hidden;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical
+}

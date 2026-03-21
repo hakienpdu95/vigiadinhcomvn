@@ -24,7 +24,7 @@
 
       <main id="main" class="main">
         <div class="container">
-          <div class="w-full items-center flex justify-between">
+          <div class="w-full inline-block clear-both mt-4 mb-5">
             @if (has_nav_menu('primary_navigation'))
             <nav class="main-menu">
               {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
@@ -47,10 +47,8 @@
           </div>
       </div>
     </main>
-
-    @include('sections.footer')
     </div>
-
+    @include('sections.footer')
     @php(do_action('get_footer'))
     @php(wp_footer())
     @yield('scripts')
