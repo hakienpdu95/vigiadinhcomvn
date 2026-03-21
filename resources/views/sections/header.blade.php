@@ -1,32 +1,46 @@
-<header class="bg-transparent">
-	<div class="py-3 hidden xl:block header-top">
-		<div class="container">
-			<nav class="bg-transparent flex justify-between items-center">
-				<a href="{{ home_url('/') }}" class="text-3xl font-semibold leading-none">
-					<img src="{{ asset('images/logo.png') }}" alt="Logo">
-				</a>
-				@include('partials.search-form')
-				<div class="flex justify-center">
-					<a href="#" target="_blank" title="RSS">
-						<div class="header-icon relative flex">
-							<i class="hgi hgi-stroke hgi-rss text-2xl"></i>
-						</div>
+<header class="bg-transparent relative z-8 min-h-[60px] w-full m-0">
+	<div class="header-wrap-inner border-b-1 border-b-[#ebebeb]">
+		<div class="py-3 hidden xl:block header-top">
+			<div class="container mx-auto">
+				<nav class="bg-transparent flex justify-between items-center">
+					<a href="{{ home_url('/') }}" class="flex overflow-hidden items-center max-w-[270px] max-h-[150px]">
+						<img class="h-full w-auto max-w-full max-h-[inherit] pt-[5px] pb-[5px] object-contain" src="{{ asset('images/logo.png') }}" alt="Logo">
 					</a>
-					<a href="#" target="_blank" title="Facebook">
-						<div class="header-icon relative flex">
-							<i class="hgi hgi-stroke hgi-facebook-01 text-2xl"></i>
+					@include('partials.search-form')
+
+					<div class="flex items-center flex-row">
+						<div class="info-box-wrapper flex grow items-center pl-[10px] pr-[10px]">
+							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="RSS">
+								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
+									<div class="info-box-icon text-[#00438A] text-[30px]">
+										<i class="hgi hgi-stroke hgi-rss text-2xl"></i>
+									</div>
+								</div>
+							</a>
+
+							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="Facebook">
+								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
+									<div class="info-box-icon text-[#00438A] text-[30px]">
+										<i class="hgi hgi-stroke hgi-facebook-01 text-2xl"></i>
+									</div>
+								</div>
+							</a>
+
+							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="Youtube">
+								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
+									<div class="info-box-icon text-[#00438A] text-[30px]">
+										<i class="hgi hgi-stroke hgi-youtube text-2xl"></i>
+									</div>
+								</div>
+							</a>
+
+							<div class="item type-button flex flex-row items-stretch px-[10px]">
+								<a href="#" target="_blank" class="bg-[#00438A] border border-[#00438A] !no-underline !text-white text-sm font-normal inline-block text-center px-3 py-1.5 min-w-[90px] rounded-[50px] cursor-pointer transition duration-150 ease-in-out leading-normal">Đăng ký</a>
+							</div>
 						</div>
-					</a>
-					<a href="#" target="_blank" title="Youtube">
-						<div class="header-icon relative flex">
-							<i class="hgi hgi-stroke hgi-youtube text-2xl"></i>
-						</div>
-					</a>
-					<div class="item type-button">
-						<a href="#" target="_blank" class="bg-primary text-dark hover:text-primary hover:bg-dark rounded-2xl px-7.5 py-3.5 font-medium transition-all duration-300">Đăng ký</a>
 					</div>
-				</div>
-			</nav>
+				</nav>
+			</div>
 		</div>
 	</div>
 

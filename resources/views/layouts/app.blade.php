@@ -19,9 +19,8 @@
     @php(wp_body_open())
     @include('partials.body-common')
     
+    @include('sections.header')
     <div id="app" class="container mx-auto bg-white">
-      @include('sections.header')
-
       <main id="main" class="main">
         <div class="container">
           <div class="w-full inline-block clear-both mt-4 mb-5">
