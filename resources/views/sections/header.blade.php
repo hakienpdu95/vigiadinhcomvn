@@ -1,4 +1,4 @@
-<header class="bg-transparent relative z-8 min-h-[60px] w-full m-0">
+<header class="header-wrap bg-transparent relative z-8 min-h-[60px] w-full m-0">
 	<div class="header-wrap-inner border-b-1 border-b-[#ebebeb]">
 		<div class="py-3 hidden xl:block header-top">
 			<div class="container mx-auto">

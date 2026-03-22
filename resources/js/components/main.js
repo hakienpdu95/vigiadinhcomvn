@@ -149,4 +149,65 @@
         });
         return false;
     });
+
+        /*------ Sticky Header (tối ưu từ code mẫu) ------*/
+    const $headerWrap = $(".header-wrap");
+    const $headerInner = $(".header-wrap-inner");
+
+    if ($headerWrap.length && $headerInner.length) {
+        let isSticky = false;
+
+        function handleStickyHeader() {
+            const scrollTop = $win.scrollTop();
+            const headerOffset = $headerWrap.offset().top;
+            const headerHeight = $headerWrap.outerHeight();
+
+            if (scrollTop > headerOffset + headerHeight + 30) {   // +30 để mượt hơn
+                if (!isSticky) {
+                    isSticky = true;
+                    $headerInner.addClass("sticky");
+                    $body.css("padding-top", $headerInner.outerHeight() + "px"); // tránh nhảy layout
+                }
+            } else {
+                if (isSticky) {
+                    isSticky = false;
+                    $headerInner.removeClass("sticky");
+                    $body.css("padding-top", "");
+                }
+            }
+        }
+
+        $win.on("load.sellzy scroll.sellzy resize.sellzy", handleStickyHeader);
+        // Chạy lần đầu sau khi DOM ổn định
+        setTimeout(handleStickyHeader, 100);
+    }
+
+    /*------ Smooth Scroll to Anchor (từ code mẫu, đã tối ưu) ------*/
+    $doc.on("click.sellzy", 'a[href^="#"]', function (e) {
+        const href = $(this).attr("href");
+
+        if (href === "#") {
+            e.preventDefault();
+            $("html, body").animate({ scrollTop: 0 }, 800);
+            return;
+        }
+
+        const $target = $(href);
+        if ($target.length) {
+            e.preventDefault();
+
+            let offset = $target.offset().top;
+
+            // Tự động trừ chiều cao header (có sticky hay không)
+            if ($headerInner.hasClass("sticky")) {
+                offset -= $headerInner.outerHeight();
+            } else {
+                offset -= $headerWrap.outerHeight() || 80;
+            }
+
+            $("html, body").animate({
+                scrollTop: offset - 20   // khoảng cách đệm đẹp
+            }, 900);
+        }
+    });
 })(jQuery);
