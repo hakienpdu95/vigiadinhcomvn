@@ -150,42 +150,60 @@
         return false;
     });
 
-        /*------ Sticky Header (tối ưu từ code mẫu) ------*/
+    /*====== STICKY HEADER ======*/
     const $headerWrap = $(".header-wrap");
     const $headerInner = $(".header-wrap-inner");
 
     if ($headerWrap.length && $headerInner.length) {
         let isSticky = false;
+        let headerHeight = 0;
 
         function handleStickyHeader() {
             const scrollTop = $win.scrollTop();
-            const headerOffset = $headerWrap.offset().top;
-            const headerHeight = $headerWrap.outerHeight();
+            const triggerPoint = $headerWrap.offset().top + $headerWrap.outerHeight();
 
-            if (scrollTop > headerOffset + headerHeight + 30) {   // +30 để mượt hơn
+            // Tính chiều cao 1 lần duy nhất
+            if (headerHeight === 0) {
+                headerHeight = $headerInner.outerHeight();
+            }
+
+            if (scrollTop > triggerPoint + 20) {   // +20 để mượt hơn
                 if (!isSticky) {
                     isSticky = true;
+                    $headerWrap.css("min-height", headerHeight + "px"); // giữ chỗ
                     $headerInner.addClass("sticky");
-                    $body.css("padding-top", $headerInner.outerHeight() + "px"); // tránh nhảy layout
                 }
             } else {
                 if (isSticky) {
                     isSticky = false;
+                    $headerWrap.css("min-height", "");
                     $headerInner.removeClass("sticky");
-                    $body.css("padding-top", "");
                 }
             }
         }
 
-        $win.on("load.sellzy scroll.sellzy resize.sellzy", handleStickyHeader);
-        // Chạy lần đầu sau khi DOM ổn định
-        setTimeout(handleStickyHeader, 100);
+        // Dùng requestAnimationFrame cho hiệu suất cao + mượt
+        let ticking = false;
+        $win.on("scroll.sellzy resize.sellzy", function () {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    handleStickyHeader();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Chạy lần đầu
+        $win.on("load.sellzy", function () {
+            headerHeight = $headerInner.outerHeight();
+            handleStickyHeader();
+        });
     }
 
-    /*------ Smooth Scroll to Anchor (từ code mẫu, đã tối ưu) ------*/
+    /*====== Smooth Scroll Anchor (giữ nguyên như cũ, vẫn mượt) ======*/
     $doc.on("click.sellzy", 'a[href^="#"]', function (e) {
         const href = $(this).attr("href");
-
         if (href === "#") {
             e.preventDefault();
             $("html, body").animate({ scrollTop: 0 }, 800);
@@ -195,19 +213,15 @@
         const $target = $(href);
         if ($target.length) {
             e.preventDefault();
-
             let offset = $target.offset().top;
 
-            // Tự động trừ chiều cao header (có sticky hay không)
             if ($headerInner.hasClass("sticky")) {
                 offset -= $headerInner.outerHeight();
             } else {
                 offset -= $headerWrap.outerHeight() || 80;
             }
 
-            $("html, body").animate({
-                scrollTop: offset - 20   // khoảng cách đệm đẹp
-            }, 900);
+            $("html, body").animate({ scrollTop: offset - 20 }, 900);
         }
     });
 })(jQuery);

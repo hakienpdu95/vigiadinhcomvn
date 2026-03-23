@@ -5,6 +5,10 @@
     top: 65px;
 }
 
+.header-wrap {
+    transition: min-height 0.25s ease;
+}
+
 .header-wrap-inner {
 	&.sticky {
 	    position: fixed;

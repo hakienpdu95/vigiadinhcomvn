@@ -20,7 +20,7 @@
     @include('partials.body-common')
     
     @include('sections.header')
-    <div id="app" class="container mx-auto bg-white">
+    <div id="app" class="py-3 section-content container mx-auto bg-white">
       <main id="main" class="main">
         <div class="container">
           <div class="w-full inline-block clear-both mt-4 mb-5">
