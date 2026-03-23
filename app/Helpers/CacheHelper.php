@@ -84,13 +84,14 @@ class CacheHelper
         self::$memory = [];
         
         $post_type = is_object($post) ? $post->post_type : get_post_type($post_id);
-        
+        if (empty($post_type)) return;
+
         if ($post_type && in_array($post_type, \App\Database\CustomTableManager::$registered ?? [])) {
             self::bumpDataVersion($post_type);
         }
 
         // === BUMP CHO DANH SÁCH MERGED (post + event) ===
-        if (in_array($post_type, ['post', 'event', 'viet-heritage', 'viet-product', 'viet-travel'])) {
+        if (in_array($post_type, ['post', 'event', 'viet-heritage', 'viet-product', 'viet-travel', 'member'])) {
             self::bumpDataVersion('content_list');
         }
         

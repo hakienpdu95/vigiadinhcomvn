@@ -287,7 +287,27 @@ require_once get_theme_file_path('app/helpers.php');
 require_once get_theme_file_path('app/Database/CustomTableManager.php');
 \App\Database\CustomTableManager::init();
 // === REGISTER CPT + KHAI BÁO FIELD QUAN TRỌNG (CRITICAL) ===
-// Trong app/setup.php (sau register_nav_menus hoặc trong init)
+\App\Database\CustomTableManager::register('member', ['*']);
+
+add_action('after_setup_theme', function () {
+    if (!get_role('member')) {
+        add_role('member', 'Thành viên', ['read' => true, 'upload_files' => true]);
+    }
+}, 20);
+
+require_once get_theme_file_path('app/Auth/MemberRegistration.php');
+\App\Auth\MemberRegistration::init();
+
+require_once get_theme_file_path('app/Helpers/MemberHelper.php');
+
+// Bảo vệ trang đăng ký
+// add_action('template_redirect', function () {
+//     if (is_page('dang-ky') && is_user_logged_in()) {
+//         wp_safe_redirect(home_url('/tai-khoan'));
+//         exit;
+//     }
+// });
+
 \App\Database\CustomTableManager::register('post', [
     'subtitle', 'lead', 'reading_time', 'article_type',
     'flags', 'priority', 'is_pinned', 'pinned_until', 'is_sponsored',
