@@ -36,13 +36,13 @@
                   @yield('content')
               </div>
 
-              <div class="w-full lg:w-75 flex-none grid gap-[15px] sm:grid-cols-2 lg:grid-cols-1 top-5">
+              <aside class="w-full lg:w-75 flex-none grid gap-[15px] sm:grid-cols-2 lg:grid-cols-1 top-5">
                   @hasSection('sidebar')
-                    <aside class="sidebar">
+                    <div class="sidebar sidebar-inner">
                       @yield('sidebar')
-                    </aside>
+                    </div>
                   @endif
-              </div>
+              </aside>
           </div>
       </div>
     </main>

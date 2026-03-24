@@ -296,17 +296,29 @@ add_action('after_setup_theme', function () {
 }, 20);
 
 require_once get_theme_file_path('app/Auth/MemberRegistration.php');
+require_once get_theme_file_path('app/Helpers/EmailHelper.php');
+require_once get_theme_file_path('app/Auth/MemberActivation.php');
+require_once get_theme_file_path('app/Auth/MemberPasswordReset.php');
+
 \App\Auth\MemberRegistration::init();
+\App\Auth\MemberActivation::init();
+\App\Auth\MemberPasswordReset::init();
+
+// === TẮT HOÀN TOÀN EMAIL MẶC ĐỊNH CỦA WORDPRESS (Login Details) ===
+remove_action('register_new_user', 'wp_send_new_user_notifications');
+add_filter('wp_new_user_notification_email', '__return_false');
 
 require_once get_theme_file_path('app/Helpers/MemberHelper.php');
 
-// Bảo vệ trang đăng ký
-// add_action('template_redirect', function () {
-//     if (is_page('dang-ky') && is_user_logged_in()) {
-//         wp_safe_redirect(home_url('/tai-khoan'));
-//         exit;
-//     }
-// });
+add_action('after_setup_theme', function () {
+    if (!get_role('pending_member')) {
+        add_role('pending_member', 'Thành viên chờ kích hoạt', ['read' => true]);
+    }
+}, 20);
+
+// === SMTP MAILER 10/10 ===
+require_once get_theme_file_path('app/Helpers/SMTPMailer.php');
+\App\Helpers\SMTPMailer::init();
 
 \App\Database\CustomTableManager::register('post', [
     'subtitle', 'lead', 'reading_time', 'article_type',

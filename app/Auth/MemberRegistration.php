@@ -44,7 +44,7 @@ class MemberRegistration {
             'user_email'   => sanitize_email($post['email']),
             'user_pass'    => $post['password'],
             'display_name' => sanitize_text_field($post['full_name']),
-            'role'         => 'member',
+            'role'         => 'pending_member',
         ]);
 
         if (is_wp_error($user_id)) return $user_id;
@@ -64,7 +64,8 @@ class MemberRegistration {
         // Liên kết 1:1
         update_post_meta($member_id, '_user_id', $user_id);
         update_user_meta($user_id, '_member_id', $member_id);
-
+        \App\Auth\MemberActivation::sendActivation($user_id);
+        
         // BULK META – chỉ 1 lần query (10/10 performance)
         self::saveMetaBulk($member_id, $post);
 
@@ -77,7 +78,7 @@ class MemberRegistration {
         CacheHelper::bumpDataVersion('member');
         CacheHelper::bumpDataVersion('content_list'); // nếu bạn merge member vào homepage
 
-        wp_new_user_notification($user_id, null, 'user');
+        // wp_new_user_notification($user_id, null, 'user');
 
         return $user_id;
     }
