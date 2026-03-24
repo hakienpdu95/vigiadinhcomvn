@@ -11,66 +11,82 @@ class MemberPermissions {
         if (self::$initialized) return;
         self::$initialized = true;
 
-        // === CÁC HOOK CHÍNH ===
         add_filter('wp_insert_post_data', [self::class, 'forcePendingStatus'], 10, 2);
+        add_action('pre_get_posts', [self::class, 'restrictToOwnPosts'], 5);
         add_action('admin_enqueue_scripts', [self::class, 'hidePublishButton']);
         add_action('admin_menu', [self::class, 'removeTaxonomyMetaboxForMember']);
 
-        // === RESTRICT BÀI VIẾT – PHIÊN BẢN MẠNH NHẤT ===
-        add_action('parse_query', [self::class, 'restrictToOwnPosts'], 5);
-        add_action('pre_get_posts', [self::class, 'restrictToOwnPosts'], 5);
+        // Cho phép chỉnh sửa bài đã publish
+        add_filter('user_has_cap', [self::class, 'allowEditPublishedPost'], 10, 3);
 
-        // Cấp quyền 1 lần duy nhất
         add_action('after_setup_theme', [self::class, 'grantRoleMemberCapabilities'], 20);
     }
 
-    /**
-     * MEMBER CHỈ THẤY BÀI CỦA CHÍNH MÌNH (phiên bản mạnh nhất)
-     */
-    public static function restrictToOwnPosts(\WP_Query $query): void {
-        if (!is_admin()) return;
-        if ($query->get('post_type') !== 'viet-product') return;
-
-        $user = wp_get_current_user();
-        if (!$user || $user->ID === 0) return;
-
-        // Admin thì không giới hạn
-        if (current_user_can('administrator')) {
-            error_log("[MemberPermissions] ADMIN - Hiển thị tất cả bài viet-product");
-            return;
-        }
-
-        // Chỉ áp dụng cho member
-        if (!in_array('member', (array)$user->roles)) return;
-
-        // Set author = chính user đó
-        $query->set('author', $user->ID);
-
-        // Debug log để bạn kiểm tra
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            $screen = get_current_screen();
-            error_log("[MemberPermissions] MEMBER #{$user->ID} - Chỉ hiển thị bài của chính mình | Screen: " . ($screen->id ?? 'unknown'));
-        }
-    }
-
     public static function grantRoleMemberCapabilities(): void {
-        if (get_option('member_caps_granted_v2')) return;
+        if (get_option('member_caps_granted_v4')) return;
 
         $role = get_role('member');
         if ($role) {
-            $caps = [
-                'read', 'upload_files',
-                'read_viet_product', 'read_private_viet_products',
-                'edit_viet_product', 'edit_viet_products',
-                'create_viet_products',
-                'delete_viet_product', 'delete_viet_products'
-            ];
-            foreach ($caps as $cap) {
-                if (!$role->has_cap($cap)) $role->add_cap($cap);
-            }
-        }
+            $caps = ['read', 'upload_files', 'read_viet_product', 'read_private_viet_products',
+                     'edit_viet_product', 'edit_viet_products', 'edit_others_viet_products',
+                     'create_viet_products', 'edit_published_viet_products',
+                     'delete_viet_product', 'delete_viet_products'];
 
-        update_option('member_caps_granted_v2', true, true);
+            foreach ($caps as $cap) $role->add_cap($cap);
+        }
+        update_option('member_caps_granted_v4', true, true);
+    }
+
+    /**
+     * MEMBER CHỈ THẤY BÀI CỦA CHÍNH MÌNH
+     */
+    public static function restrictToOwnPosts(\WP_Query $query): void {
+        if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'viet-product') return;
+
+        $user = wp_get_current_user();
+        if (in_array('member', (array)$user->roles) && !current_user_can('administrator')) {
+            $query->set('author', $user->ID);
+        }
+    }
+
+    /**
+     * CHO PHÉP MEMBER CHỈNH SỬA BÀI ĐÃ PUBLISH (KHÔNG ÉP VỀ PENDING)
+     */
+    public static function allowEditPublishedPost($allcaps, $caps, $args): array {
+        if (empty($args[0]) || $args[0] !== 'edit_post') return $allcaps;
+
+        $post_id = (int)($args[2] ?? 0);
+        if (!$post_id) return $allcaps;
+
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'viet-product') return $allcaps;
+
+        $user = wp_get_current_user();
+        if (!in_array('member', (array)$user->roles)) return $allcaps;
+
+        // Nếu bài đã publish và thuộc về user này → cho phép edit
+        if ($post->post_status === 'publish' && (int)$post->post_author === $user->ID) {
+            $allcaps['edit_viet_product'] = true;
+            $allcaps['edit_published_viet_products'] = true;
+            $allcaps['edit_post'] = true;
+        }
+        return $allcaps;
+    }
+
+    /**
+     * ÉP PENDING CHỈ KHI TẠO MỚI HOẶC BÀI CHƯA PUBLISH
+     */
+    public static function forcePendingStatus(array $data, array $postarr): array {
+        if (!in_array($data['post_type'], self::$allowed_cpts)) return $data;
+
+        $user = wp_get_current_user();
+        if (!in_array('member', (array)$user->roles)) return $data;
+
+        // Chỉ ép pending khi tạo mới hoặc bài đang là draft/pending
+        if ($data['post_status'] !== 'publish' && empty($postarr['ID'])) {
+            $data['post_status'] = 'pending';
+        }
+        return $data;
     }
 
     public static function publishProduct(int $post_id): bool {
@@ -83,16 +99,6 @@ class MemberPermissions {
             return true;
         }
         return false;
-    }
-
-    public static function forcePendingStatus(array $data, array $postarr): array {
-        if (!in_array($data['post_type'], self::$allowed_cpts)) return $data;
-
-        $user = wp_get_current_user();
-        if (in_array('member', (array)$user->roles) && $data['post_status'] !== 'trash') {
-            $data['post_status'] = 'pending';
-        }
-        return $data;
     }
 
     public static function hidePublishButton(): void {
