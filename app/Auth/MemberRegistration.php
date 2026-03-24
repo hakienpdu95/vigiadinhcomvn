@@ -23,6 +23,13 @@ class MemberRegistration {
         }
         set_transient($key, $attempts + 1, 300);
 
+        // === TURNSTILE VERIFICATION (Cloudflare) ===
+        $token = sanitize_text_field($_POST['cf-turnstile-response'] ?? '');
+        if (!\App\Helpers\SecurityHelper::verify($token)) {
+            wp_send_json_error(['message' => 'Vui lòng xác minh bạn không phải robot.']);
+            return; // Dừng ngay, không chạy tiếp process()
+        }
+
         $result = self::process($_POST, $_FILES);
 
         if (is_wp_error($result)) {
@@ -65,7 +72,7 @@ class MemberRegistration {
         update_post_meta($member_id, '_user_id', $user_id);
         update_user_meta($user_id, '_member_id', $member_id);
         \App\Auth\MemberActivation::sendActivation($user_id);
-        
+
         // BULK META – chỉ 1 lần query (10/10 performance)
         self::saveMetaBulk($member_id, $post);
 
