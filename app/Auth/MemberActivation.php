@@ -70,6 +70,8 @@ class MemberActivation {
             CacheHelper::bumpDataVersion('member');
         }
 
+        \App\Auth\MemberPermissions::grantMemberAccess($user_id);
+        
         wp_safe_redirect(home_url('/kich-hoat?success=1'));
         exit;
     }

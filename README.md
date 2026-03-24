@@ -222,3 +222,8 @@ $block2 = theme_option('widget_block_2');
 @endif
 
 <!-- Khối 2 tương tự -->
+
+## Cách sử dụng khi thu phí sau này (rất đơn giản)
+Khi user thanh toán thành công cho 1 tin đăng (ví dụ $post_id = 123):
+
+\App\Auth\MemberPermissions::publishProduct(123);   // ← tự động xuất bản bài đó

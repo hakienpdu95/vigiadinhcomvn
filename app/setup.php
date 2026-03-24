@@ -299,9 +299,11 @@ require_once get_theme_file_path('app/Auth/MemberRegistration.php');
 require_once get_theme_file_path('app/Helpers/EmailHelper.php');
 require_once get_theme_file_path('app/Auth/MemberActivation.php');
 require_once get_theme_file_path('app/Auth/MemberPasswordReset.php');
+require_once get_theme_file_path('app/Auth/MemberPermissions.php');
 
 \App\Auth\MemberRegistration::init();
 \App\Auth\MemberActivation::init();
+\App\Auth\MemberPermissions::init();
 \App\Auth\MemberPasswordReset::init();
 
 // === TẮT HOÀN TOÀN EMAIL MẶC ĐỊNH CỦA WORDPRESS (Login Details) ===
