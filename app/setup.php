@@ -355,8 +355,13 @@ require_once get_theme_file_path('app/Helpers/SMTPMailer.php');
 \App\Database\CustomTableManager::register('viet-product', [
     '*'
 ]);
-// \App\Database\CustomTableManager::register('project', ['flags', 'budget', 'deadline', 'project_phase', 'client']);
-// \App\Database\CustomTableManager::register('news', ['flags', 'hot', 'trending', 'author_custom']);
+
+\App\Database\CustomTableManager::register('property-for-sale', [
+    '*'
+]);
+\App\Database\CustomTableManager::register('property-for-rent', [
+    '*'
+]);
 
 // Nếu muốn bump TẤT CẢ meta cho 1 CPT nào đó (ví dụ test):
 // \App\Database\CustomTableManager::register('video', ['*']);

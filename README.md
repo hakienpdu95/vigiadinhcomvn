@@ -227,3 +227,11 @@ $block2 = theme_option('widget_block_2');
 Khi user thanh toán thành công cho 1 tin đăng (ví dụ $post_id = 123):
 
 \App\Auth\MemberPermissions::publishProduct(123);   // ← tự động xuất bản bài đó
+
+// ====================== SMTP CONFIG ======================
+define('SMTP_HOST',     'smtp.gmail.com');          
+define('SMTP_PORT',     587);
+define('SMTP_USERNAME', 'dohakien395@gmail.com');         
+define('SMTP_PASSWORD', 'ufjv zdot nsmu mfhm');      
+define('SMTP_FROM',     'dohakien395@gmail.com');          
+define('SMTP_FROM_NAME', 'vigiadinhcomvn');        

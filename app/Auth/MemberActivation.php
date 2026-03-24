@@ -78,6 +78,10 @@ class MemberActivation {
 
     public static function blockUnactivatedLogin($user, $username, $password) {
         if (!$user instanceof \WP_User) return $user;
+        
+        if (in_array('administrator', (array)$user->roles)) {
+            return $user;
+        }
 
         if (get_user_meta($user->ID, 'is_activated', true) != 1) {
             return new WP_Error('not_activated', 'Tài khoản chưa được kích hoạt. Vui lòng kiểm tra email.');
