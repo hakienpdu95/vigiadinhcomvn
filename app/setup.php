@@ -280,6 +280,9 @@ if (file_exists(get_theme_file_path('vendor/autoload.php'))) {
     require_once get_theme_file_path('vendor/autoload.php');
 }
 
+require_once get_theme_file_path('app/Helpers/SecurityHelper.php');
+\App\Helpers\SecurityHelper::init();
+
 // Global helpers (cmeta, sage_get_files, ...)
 require_once get_theme_file_path('app/helpers.php');
 

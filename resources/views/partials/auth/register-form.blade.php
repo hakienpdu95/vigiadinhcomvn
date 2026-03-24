@@ -14,7 +14,7 @@
     <input type="password" name="password_confirm" placeholder="Nhập lại mật khẩu" required>
 
     <input type="file" name="avatar" accept="image/*">
-
+    {!! \App\Helpers\SecurityHelper::renderWidget() !!}
     <button type="submit">Đăng ký</button>
 </form>
 
