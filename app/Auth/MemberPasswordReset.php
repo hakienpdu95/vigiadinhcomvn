@@ -2,7 +2,6 @@
 namespace App\Auth;
 
 use App\Helpers\EmailHelper;
-use WP_Error;
 
 class MemberPasswordReset {
     public static function init(): void {
@@ -15,10 +14,28 @@ class MemberPasswordReset {
         add_action('template_redirect', [self::class, 'handleResetLink']);
     }
 
-    // ==================== QUÊN MẬT KHẨU ====================
     public static function handleForgotAjax(): void {
         check_ajax_referer('forgot_nonce', 'nonce');
+
         $email = sanitize_email($_POST['email'] ?? '');
+
+        if (empty($email) || !is_email($email)) {
+            wp_send_json_error(['message' => 'Email không hợp lệ.']);
+            return;
+        }
+
+        // === RATE LIMITING (chống spam) ===
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $rate_key = 'forgot_rate_limit_' . md5($ip . $email);
+        $attempts = (int) get_transient($rate_key);
+
+        if ($attempts >= 3) {
+            wp_send_json_error(['message' => 'Bạn đã yêu cầu quá nhiều lần. Vui lòng thử lại sau 5 phút.']);
+            return;
+        }
+
+        set_transient($rate_key, $attempts + 1, 300); // 5 phút
+        // =================================
 
         $user = get_user_by('email', $email);
         if (!$user) {
@@ -29,17 +46,20 @@ class MemberPasswordReset {
         $key = get_password_reset_key($user);
         $link = home_url("/quen-mat-khau?action=reset&key=$key&login=" . urlencode($user->user_login));
 
-        EmailHelper::send(
+        $sent = EmailHelper::send(
             $email,
             'Đặt lại mật khẩu - ' . get_bloginfo('name'),
             'partials.auth.email.reset-password',
             ['link' => $link, 'name' => $user->display_name]
         );
 
-        wp_send_json_success(['message' => 'Link đặt lại mật khẩu đã được gửi đến email của bạn.']);
+        if ($sent) {
+            wp_send_json_success(['message' => 'Link đặt lại mật khẩu đã được gửi đến email của bạn.']);
+        } else {
+            wp_send_json_error(['message' => 'Không thể gửi email. Vui lòng thử lại sau.']);
+        }
     }
 
-    // ==================== ĐẶT LẠI MẬT KHẨU (click link) ====================
     public static function handleResetAjax(): void {
         check_ajax_referer('reset_password_nonce', 'nonce');
 
@@ -66,7 +86,6 @@ class MemberPasswordReset {
     }
 
     public static function handleResetLink(): void {
-        if (!is_page('quen-mat-khau')) return;
-        // WordPress sẽ tự xử lý reset khi có ?action=reset
+        // Không cần xử lý thêm
     }
 }
