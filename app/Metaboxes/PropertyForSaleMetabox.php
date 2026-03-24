@@ -3,7 +3,7 @@ namespace App\Metaboxes;
 
 class PropertyForSaleMetabox extends BaseMetabox {
     protected string $title = 'Thông tin chi tiết nhà đất bán';
-    protected array $post_types = ['property-for-sale'];   // ← PHẢI LÀ gạch dưới (underscore)
+    protected array $post_types = ['property-for-sale'];   // ← PHẢI là gạch dưới (underscore)
 
     protected function getFields(): array {
         return [
@@ -59,7 +59,7 @@ class PropertyForSaleMetabox extends BaseMetabox {
                 'visible'  => ['property_type', '=', 'apartment'],
             ],
 
-            // ====================== CÁC FIELD KHÁC ======================
+            // Các field khác (giá, ưu điểm, mô tả...)
             ['type' => 'heading', 'name' => 'Giá bán & Thông tin khác'],
             ['name' => 'Giá bán (tỷ VND)', 'id' => 'price', 'type' => 'number', 'step' => '0.1'],
 
@@ -68,12 +68,7 @@ class PropertyForSaleMetabox extends BaseMetabox {
                 'name'    => 'Ưu điểm',
                 'id'      => 'highlights',
                 'type'    => 'checkbox_list',
-                'options' => [
-                    'new_renovated' => 'Nhà mới sửa',
-                    'good_light'    => 'Nhiều ánh sáng tự nhiên',
-                    'near_school'   => 'Gần trường học',
-                    // thêm đầy đủ các option bạn cần
-                ],
+                'options' => [ /* thêm đầy đủ */ ],
             ],
 
             ['type' => 'heading', 'name' => 'Mô tả chi tiết'],
@@ -82,18 +77,18 @@ class PropertyForSaleMetabox extends BaseMetabox {
     }
 
     /**
-     * JS FALLBACK – ĐẢM BẢO ẨN/HIỆN NGAY LẬP TỨC (rất quan trọng)
+     * JS FALLBACK MẠNH – ĐẢM BẢO HOẠT ĐỘNG KHI EDIT BÀI
      */
-    public static function afterSaveOrLoad(): void {
+    public static function jsFallback(): void {
         ?>
         <script>
         jQuery(function($) {
             function toggleSubtypes() {
                 var type = $('#property_type').val();
-                
-                // Ẩn tất cả trước
+
+                // Ẩn cả hai trước
                 $('#house_subtype, #apartment_subtype').closest('.rwmb-field').hide();
-                
+
                 if (type === 'house') {
                     $('#house_subtype').closest('.rwmb-field').show();
                 } else if (type === 'apartment') {
@@ -101,19 +96,21 @@ class PropertyForSaleMetabox extends BaseMetabox {
                 }
             }
 
-            // Chạy khi load trang
+            // Chạy ngay khi trang load (rất quan trọng cho trang chỉnh sửa)
             toggleSubtypes();
 
             // Chạy khi thay đổi select
             $('#property_type').on('change', toggleSubtypes);
+
+            // Trigger lại khi Meta Box load xong (trường hợp edit)
+            $(document).on('rwmb_ready', toggleSubtypes);
         });
         </script>
         <?php
     }
 
-    // Gọi JS fallback sau khi metabox load
     public function __construct() {
         parent::__construct();
-        add_action('rwmb_after', [self::class, 'afterSaveOrLoad']);
+        add_action('rwmb_after', [self::class, 'jsFallback']);
     }
 }
