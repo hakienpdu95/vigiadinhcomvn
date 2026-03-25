@@ -313,6 +313,19 @@ class PropertyForSaleMetabox extends BaseMetabox
                 'min'   => 0,
                 'desc'  => 'Ví dụ: 15.000.000',
             ],
+            // ====================== HÌNH ẢNH BẤT ĐỘNG SẢN (MỚI) ======================
+            ['type' => 'heading', 'name' => 'Hình ảnh bất động sản'],
+
+            [
+                'name'             => 'Hình ảnh nhà (tối đa 6 ảnh)',
+                'id'               => 'property_images',
+                'type'             => 'image_advanced',
+                'max_file_uploads' => 6,
+                'max_status'       => true,      // hiển thị "x/6" rất tiện
+                'image_size'       => 'medium',
+                'desc'             => 'Kéo thả để sắp xếp thứ tự. Ảnh đầu tiên thường làm ảnh đại diện.',
+                'force_delete'     => false,
+            ],
         ];
     }
 
@@ -360,6 +373,9 @@ class PropertyForSaleMetabox extends BaseMetabox
                     $('#front_road_width, #land_direction').closest('.rwmb-field').show();
                 }
 
+                // === HÌNH ẢNH LUÔN HIỂN THỊ ===
+                $('#property_images').closest('.rwmb-field').show();
+                
                 // === BÁN GẤP ===
                 if (urgent) $('#urgent_days').closest('.rwmb-field').show();
             }
