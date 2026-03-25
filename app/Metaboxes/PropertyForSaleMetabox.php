@@ -3,14 +3,41 @@ namespace App\Metaboxes;
 
 class PropertyForSaleMetabox extends BaseMetabox {
     protected string $title = 'Thông tin chi tiết nhà đất bán';
-    protected array $post_types = ['property-for-sale'];   // ← PHẢI là gạch dưới (underscore)
+    protected array $post_types = ['property-for-sale']; 
 
     protected function getFields(): array {
         return [
             // ====================== VỊ TRÍ ======================
             ['type' => 'heading', 'name' => 'Vị trí bất động sản'],
+            [
+                'name' => 'Số nhà và đường',
+                'id'   => 'address_detail',
+                'type' => 'text',
+                'desc' => 'Ví dụ: 12 Nguyễn Văn A, Phường 5',
+            ],
 
-            // ====================== LOẠI HÌNH CHÍNH ======================
+            // ====================== GIÁ BÁN ======================
+            ['type' => 'heading', 'name' => 'Giá bán'],
+            [
+                'name' => 'Giá bán (tỷ VND)',
+                'id'   => 'price',
+                'type' => 'number',
+                'step' => '0.1',
+            ],
+            [
+                'name' => 'Bán gấp',
+                'id'   => 'urgent_sale',
+                'type' => 'checkbox',
+            ],
+            [
+                'name'    => 'Thời gian muốn bán nhanh (số ngày)',
+                'id'      => 'urgent_days',
+                'type'    => 'number',
+                'desc'    => 'Ví dụ: 30 ngày',
+                'visible' => ['urgent_sale', '=', 1],
+            ],
+
+            // ====================== LOẠI HÌNH ======================
             ['type' => 'heading', 'name' => 'Loại hình bất động sản'],
             [
                 'name'     => 'Loại hình',
@@ -58,52 +85,47 @@ class PropertyForSaleMetabox extends BaseMetabox {
                 ],
                 'visible'  => ['property_type', '=', 'apartment'],
             ],
-
-            // Các field khác (giá, ưu điểm, mô tả...)
-            ['type' => 'heading', 'name' => 'Giá bán & Thông tin khác'],
-            ['name' => 'Giá bán (tỷ VND)', 'id' => 'price', 'type' => 'number', 'step' => '0.1'],
-
-            ['type' => 'heading', 'name' => 'Ưu điểm nổi bật'],
-            [
-                'name'    => 'Ưu điểm',
-                'id'      => 'highlights',
-                'type'    => 'checkbox_list',
-                'options' => [ /* thêm đầy đủ */ ],
-            ],
-
-            ['type' => 'heading', 'name' => 'Mô tả chi tiết'],
-            ['name' => 'Mô tả nhà', 'id' => 'description', 'type' => 'wysiwyg', 'rows' => 10],
         ];
     }
 
     /**
-     * JS FALLBACK MẠNH – ĐẢM BẢO HOẠT ĐỘNG KHI EDIT BÀI
+     * JS FALLBACK MẠNH – HOẠT ĐỘNG HOÀN HẢO TRÊN CẢ CREATE & EDIT
      */
     public static function jsFallback(): void {
         ?>
         <script>
         jQuery(function($) {
-            function toggleSubtypes() {
+            function toggleAll() {
                 var type = $('#property_type').val();
+                var urgentChecked = $('#urgent_sale').is(':checked');
 
-                // Ẩn cả hai trước
+                // Ẩn tất cả sub-type
                 $('#house_subtype, #apartment_subtype').closest('.rwmb-field').hide();
 
+                // Hiển thị đúng sub-type
                 if (type === 'house') {
                     $('#house_subtype').closest('.rwmb-field').show();
                 } else if (type === 'apartment') {
                     $('#apartment_subtype').closest('.rwmb-field').show();
                 }
+
+                // Bán gấp
+                if (urgentChecked) {
+                    $('#urgent_days').closest('.rwmb-field').show();
+                } else {
+                    $('#urgent_days').closest('.rwmb-field').hide();
+                }
             }
 
-            // Chạy ngay khi trang load (rất quan trọng cho trang chỉnh sửa)
-            toggleSubtypes();
+            // === CHẠY NGAY KHI TRANG LOAD (rất quan trọng cho trang chỉnh sửa) ===
+            toggleAll();
 
-            // Chạy khi thay đổi select
-            $('#property_type').on('change', toggleSubtypes);
+            // === THEO DÕI THAY ĐỔI ===
+            $('#property_type').on('change', toggleAll);
+            $('#urgent_sale').on('change', toggleAll);
 
-            // Trigger lại khi Meta Box load xong (trường hợp edit)
-            $(document).on('rwmb_ready', toggleSubtypes);
+            // === TRIGGER LẠI SAU KHI META BOX LOAD XONG ===
+            $(document).on('rwmb_ready', toggleAll);
         });
         </script>
         <?php
