@@ -19,7 +19,7 @@ class PropertyForRentPostType extends BasePostType {
             'rewrite'         => ['slug' => 'nha-dat-thue'],
             'menu_icon'       => 'dashicons-building',
             'menu_position'   => 13,
-            'supports'        => ['title', 'editor', 'thumbnail'],
+            'supports'        => ['title', 'editor'],
             // 'capability_type' => 'property_for_rent',
             // 'map_meta_cap'    => true,
         ]);
