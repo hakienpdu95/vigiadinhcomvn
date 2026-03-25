@@ -100,3 +100,57 @@ $query = \App\Queries\MergedPostsQuery::breaking(6, ['post', 'event']);
         </div>
     </div>
 </div>
+
+<div class="widget">
+    <div class="c-box p-[15px] border border-[#E5E5E5]">
+        <div class="c-box__title pb-[10px]">
+            <h2 class="c-box__title__name">Đọc nhiều</h2>
+        </div>
+        <div class="c-box__content">
+            <div class="c-news-topread">
+                <ul>
+                    <li>
+                        <div class="c-news-topread__number">
+                            <span>1</span>
+                        </div>
+                        <h3 class="c-news-topread__title">
+                            <a title="Ông Trump đổ lỗi cho Bộ trưởng Hegseth về cuộc chiến với Iran" href="https://congluan.vn/ong-trump-do-loi-cho-bo-truong-hegseth-ve-cuoc-chien-voi-iran-10335595.html">Ông Trump đổ lỗi cho Bộ trưởng Hegseth về cuộc chiến với Iran</a>
+                        </h3>
+                    </li>
+                    <li>
+                        <div class="c-news-topread__number">
+                            <span>2</span>
+                        </div>
+                        <h3 class="c-news-topread__title">
+                            <a title="Giá vàng 9h sáng nay 25/3/2026: Bật tăng mạnh mẽ" href="https://congluan.vn/gia-vang-9h-sang-nay-25-3-2026-bat-tang-manh-me-10335703.html">Giá vàng 9h sáng nay 25/3/2026: Bật tăng mạnh mẽ</a>
+                        </h3>
+                    </li>
+                    <li>
+                        <div class="c-news-topread__number">
+                            <span>3</span>
+                        </div>
+                        <h3 class="c-news-topread__title">
+                            <a title="Giá vàng chiều nay 23/3/2026: Thế giới mất 305 USD/ounce, vàng SJC ‘lao dốc không phanh’" href="https://congluan.vn/gia-vang-chieu-nay-23-3-2026-the-gioi-mat-305-usd-ounce-vang-sjc-lao-doc-khong-phanh-10335479.html">Giá vàng chiều nay 23/3/2026: Thế giới mất 305 USD/ounce, vàng SJC ‘lao dốc không phanh’</a>
+                        </h3>
+                    </li>
+                    <li>
+                        <div class="c-news-topread__number">
+                            <span>4</span>
+                        </div>
+                        <h3 class="c-news-topread__title">
+                            <a title="Từ ngày 1/4, hàng không Việt Nam tạm dừng khai thác nhiều đường bay" href="https://congluan.vn/tu-ngay-1-4-hang-khong-viet-nam-tam-dung-khai-thac-nhieu-duong-bay-10335573.html">Từ ngày 1/4, hàng không Việt Nam tạm dừng khai thác nhiều đường bay</a>
+                        </h3>
+                    </li>
+                    <li>
+                        <div class="c-news-topread__number">
+                            <span>5</span>
+                        </div>
+                        <h3 class="c-news-topread__title">
+                            <a title="Chiến tranh và lạm phát không còn cứu được giá vàng" href="https://congluan.vn/chien-tranh-va-lam-phat-khong-con-cuu-duoc-gia-vang-10335439.html">Chiến tranh và lạm phát không còn cứu được giá vàng</a>
+                        </h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
