@@ -21,7 +21,7 @@ class PropertyForSalePostType extends BasePostType {
             'menu_position'   => 10,
             // 'capability_type' => 'property_for_sale',
             // 'map_meta_cap'    => true,
-            'supports'        => ['title', 'editor', 'thumbnail'],
+            'supports'        => ['title', 'editor'],
         ]);
     }
 }

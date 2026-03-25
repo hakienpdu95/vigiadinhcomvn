@@ -343,7 +343,7 @@ class PropertyForSaleMetabox extends BaseMetabox
                 var status = $('#usage_status').val() || '';
 
                 // Ẩn tất cả field của 2 khối mới + cũ
-                $('#house_subtype, #apartment_subtype, #width, #length, #land_area, #usable_area, #legal_house, #legal_apartment, #legal_land, #direction, #floors, #bedrooms, #bathrooms, ' +
+                $('#urgent_days, #house_subtype, #apartment_subtype, #width, #length, #land_area, #usable_area, #legal_house, #legal_apartment, #legal_land, #direction, #floors, #bedrooms, #bathrooms, ' +
                    '#project_name, #apartment_address, #net_area, #usage_status, #interior_status, #apartment_direction, #balcony_direction, #front_road_width, #land_direction, #monthly_rent')
                     .closest('.rwmb-field').hide();
 
@@ -375,7 +375,7 @@ class PropertyForSaleMetabox extends BaseMetabox
 
                 // === HÌNH ẢNH LUÔN HIỂN THỊ ===
                 $('#property_images').closest('.rwmb-field').show();
-                
+
                 // === BÁN GẤP ===
                 if (urgent) $('#urgent_days').closest('.rwmb-field').show();
             }
