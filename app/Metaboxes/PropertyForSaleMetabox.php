@@ -198,11 +198,126 @@ class PropertyForSaleMetabox extends BaseMetabox
                 'type' => 'number',
                 'min'  => 0,
             ],
+
+            // ====================== THÔNG TIN KHÁC (MỚI) ======================
+            ['type' => 'heading', 'name' => 'Thông tin khác'],
+
+            // === CHỈ CĂN HỘ CHUNG CƯ ===
+            [
+                'name' => 'Tên dự án / tòa nhà',
+                'id'   => 'project_name',
+                'type' => 'text',
+                'desc' => 'Ví dụ: Chung cư Sunshine City',
+            ],
+            [
+                'name' => 'Địa chỉ cụ thể',
+                'id'   => 'apartment_address',
+                'type' => 'text',
+                'desc' => 'Số căn - Tầng - Block, ví dụ: Căn 1203 - Tầng 12 - Block A',
+            ],
+            [
+                'name'  => 'Diện tích thông thuỷ (m²)',
+                'id'    => 'net_area',
+                'type'  => 'number',
+                'step'  => '0.1',
+                'min'   => 0,
+            ],
+            [
+                'name'    => 'Tình trạng sử dụng',
+                'id'      => 'usage_status',
+                'type'    => 'select',
+                'std'     => '',
+                'options' => [
+                    ''              => '-- Chọn tình trạng --',
+                    'dang_o'        => 'Đang ở',
+                    'dang_cho_thue' => 'Đang cho thuê',
+                    'nha_trong'     => 'Nhà trống',
+                ],
+            ],
+            [
+                'name'    => 'Nội thất',
+                'id'      => 'interior_status',
+                'type'    => 'select',
+                'std'     => '',
+                'options' => [
+                    ''              => '-- Chọn nội thất --',
+                    'day_du'        => 'Nội thất đầy đủ',
+                    'co_ban'        => 'Nội thất cơ bản',
+                    'ban_giao_tho'  => 'Bàn giao thô',
+                ],
+            ],
+            [
+                'name'    => 'Hướng cửa chính',
+                'id'      => 'apartment_direction',
+                'type'    => 'select',
+                'std'     => '',
+                'options' => [
+                    ''          => '-- Chọn hướng --',
+                    'tay_bac'   => 'Tây Bắc',
+                    'bac'       => 'Bắc',
+                    'dong_bac'  => 'Đông Bắc',
+                    'tay'       => 'Tây',
+                    'dong'      => 'Đông',
+                    'tay_nam'   => 'Tây Nam',
+                    'nam'       => 'Nam',
+                    'dong_nam'  => 'Đông Nam',
+                ],
+            ],
+            [
+                'name'    => 'Hướng ban công',
+                'id'      => 'balcony_direction',
+                'type'    => 'select',
+                'std'     => '',
+                'options' => [
+                    ''         => '-- Chọn hướng ban công --',
+                    'dong'     => 'Đông',
+                    'tay_nam'  => 'Tây Nam',
+                    'nam'      => 'Nam',
+                    'dong_nam' => 'Đông Nam',
+                ],
+            ],
+
+            // === CHỈ ĐẤT THỔ CƯ ===
+            [
+                'name'  => 'Đường trước nhà/đất (m)',
+                'id'    => 'front_road_width',
+                'type'  => 'number',
+                'step'  => '0.1',
+                'min'   => 0,
+                'desc'  => 'Mặt tiền kinh doanh / nội bộ',
+            ],
+            [
+                'name'    => 'Hướng',
+                'id'      => 'land_direction',
+                'type'    => 'select',
+                'std'     => '',
+                'options' => [
+                    ''          => '-- Chọn hướng --',
+                    'tay_bac'   => 'Tây Bắc',
+                    'bac'       => 'Bắc',
+                    'dong_bac'  => 'Đông Bắc',
+                    'tay'       => 'Tây',
+                    'dong'      => 'Đông',
+                    'tay_nam'   => 'Tây Nam',
+                    'nam'       => 'Nam',
+                    'dong_nam'  => 'Đông Nam',
+                ],
+            ],
+
+            // === FIELD ẨN/HIỆN THEO TÌNH TRẠNG (chỉ Căn hộ) ===
+            [
+                'name'  => 'Giá cho thuê mỗi tháng (VNĐ)',
+                'id'    => 'monthly_rent',
+                'type'  => 'number',
+                'step'  => '100000',
+                'min'   => 0,
+                'desc'  => 'Ví dụ: 15.000.000',
+            ],
         ];
     }
 
     /**
-     * JS FALLBACK SIÊU MẠNH – Hoạt động hoàn hảo cả Create & Edit
+     * JS FALLBACK SIÊU MẠNH – Xử lý cả 2 khối (Thông tin nhà + Thông tin khác) + nested conditional
      */
     public static function jsFallback(): void
     {
@@ -210,48 +325,53 @@ class PropertyForSaleMetabox extends BaseMetabox
         <script>
         jQuery(function($) {
             function toggleAll() {
-                var type = $('#property_type').val() || '';
-                var urgentChecked = $('#urgent_sale').is(':checked');
+                var type   = $('#property_type').val() || '';
+                var urgent = $('#urgent_sale').is(':checked');
+                var status = $('#usage_status').val() || '';
 
-                // Ẩn tất cả field thuộc "Thông tin nhà" + subtype cũ
-                $('#house_subtype, #apartment_subtype, #width, #length, #land_area, #usable_area, #legal_house, #legal_apartment, #legal_land, #direction, #floors, #bedrooms, #bathrooms')
+                // Ẩn tất cả field của 2 khối mới + cũ
+                $('#house_subtype, #apartment_subtype, #width, #length, #land_area, #usable_area, #legal_house, #legal_apartment, #legal_land, #direction, #floors, #bedrooms, #bathrooms, ' +
+                   '#project_name, #apartment_address, #net_area, #usage_status, #interior_status, #apartment_direction, #balcony_direction, #front_road_width, #land_direction, #monthly_rent')
                     .closest('.rwmb-field').hide();
 
-                // === SUB-TYPE (giữ nguyên logic cũ) ===
+                // === SUB-TYPE cũ ===
+                if (type === 'house') $('#house_subtype').closest('.rwmb-field').show();
+                if (type === 'apartment') $('#apartment_subtype').closest('.rwmb-field').show();
+
+                // === THÔNG TIN NHÀ (giữ nguyên) ===
                 if (type === 'house') {
-                    $('#house_subtype').closest('.rwmb-field').show();
+                    $('#width, #length, #land_area, #legal_house, #direction, #floors, #bedrooms, #bathrooms').closest('.rwmb-field').show();
                 } else if (type === 'apartment') {
-                    $('#apartment_subtype').closest('.rwmb-field').show();
+                    $('#usable_area, #legal_apartment, #bedrooms, #bathrooms').closest('.rwmb-field').show();
+                } else if (type === 'land') {
+                    $('#width, #length, #land_area, #legal_land').closest('.rwmb-field').show();
                 }
 
-                // === THÔNG TIN NHÀ THEO LOẠI HÌNH ===
-                if (type === 'house') {
-                    $('#width, #length, #land_area, #legal_house, #direction, #floors, #bedrooms, #bathrooms')
+                // === THÔNG TIN KHÁC (MỚI) ===
+                if (type === 'apartment') {
+                    $('#project_name, #apartment_address, #net_area, #usage_status, #interior_status, #apartment_direction, #balcony_direction')
                         .closest('.rwmb-field').show();
-                } else if (type === 'apartment') {
-                    $('#usable_area, #legal_apartment, #bedrooms, #bathrooms')
-                        .closest('.rwmb-field').show();
+
+                    // Nested: Đang cho thuê → hiện giá thuê
+                    if (status === 'dang_cho_thue') {
+                        $('#monthly_rent').closest('.rwmb-field').show();
+                    }
                 } else if (type === 'land') {
-                    $('#width, #length, #land_area, #legal_land')
-                        .closest('.rwmb-field').show();
+                    $('#front_road_width, #land_direction').closest('.rwmb-field').show();
                 }
 
                 // === BÁN GẤP ===
-                if (urgentChecked) {
-                    $('#urgent_days').closest('.rwmb-field').show();
-                } else {
-                    $('#urgent_days').closest('.rwmb-field').hide();
-                }
+                if (urgent) $('#urgent_days').closest('.rwmb-field').show();
             }
 
-            // === CHẠY NGAY + THEO DÕI THAY ĐỔI ===
+            // === CHẠY NGAY + THEO DÕI ===
             toggleAll();
-            $('#property_type').on('change', toggleAll);
+            $('#property_type, #usage_status').on('change', toggleAll);
             $('#urgent_sale').on('change', toggleAll);
 
-            // === RẤT QUAN TRỌNG CHO TRANG CHỈNH SỬA BÀI CŨ ===
+            // === LOAD ĐÚNG KHI CHỈNH SỬA BÀI CŨ ===
             $(document).on('rwmb_ready', toggleAll);
-            setTimeout(toggleAll, 300); // safeguard khi RWMB load chậm
+            setTimeout(toggleAll, 400); // an toàn hơn
         });
         </script>
         <?php
