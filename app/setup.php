@@ -425,6 +425,10 @@ add_filter('default_hidden_meta_boxes', function ($hidden, $screen) {
     return $hidden;
 }, 10, 2);
 
+// === LOAD MORE AJAX ===
+require_once get_theme_file_path('app/Ajax/LoadMore.php');
+\App\Ajax\LoadMore::init();
+
 /** === QUERY HELPER === */
 require_once get_theme_file_path('app/Helpers/QueryHelper.php');
 
@@ -495,9 +499,6 @@ require_once get_theme_file_path('app/Queries/MergedPostsQuery.php');
 \App\Queries\MergedPostsQuery::initArchive('event',   ['posts_per_page' => 2]);
 \App\Queries\MergedPostsQuery::initArchive('viet-heritage',   ['posts_per_page' => 2]);
 \App\Queries\MergedPostsQuery::initArchive('viet-product',   ['posts_per_page' => 2]);
-// \App\Queries\MergedPostsQuery::initArchive('project', ['posts_per_page' => 9]);
-// \App\Queries\MergedPostsQuery::initArchive('news',    ['posts_per_page' => 15]);
-
 /**
  * ===============================================
  * HOMEPAGE MERGE 'post' + 'event' - PAGINATION 404 FIX
@@ -543,13 +544,6 @@ add_filter('image_size_names_choose', function ($sizes) {
         'thumb-xl'     => __('Thumb XL – Hero', 'sage'),
     ];
 });
-
-add_action('wp_head', function () {
-    echo '<style>';
-    echo '@font-face{font-family:"Roboto";font-style:normal;font-weight:400;src:url('.get_theme_file_uri('public/build/fonts/Roboto-Regular.woff2').') format("woff2");font-display:swap}';
-    echo '@font-face{font-family:"Roboto";font-style:normal;font-weight:500;src:url('.get_theme_file_uri('public/build/fonts/Roboto-Medium.woff2').') format("woff2");font-display:swap}';
-    echo '</style>';
-}, 1);
 
 add_action('admin_enqueue_scripts', function () {
     $screen = get_current_screen();
