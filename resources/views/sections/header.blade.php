@@ -3,9 +3,29 @@
 		<div class="py-3 hidden xl:block header-top">
 			<div class="container mx-auto">
 				<nav class="bg-transparent flex justify-between items-center">
-					<a href="{{ home_url('/') }}" class="flex overflow-hidden items-center max-w-[270px] max-h-[150px]">
-						<img class="h-full w-auto max-w-full max-h-[inherit] pt-[5px] pb-[5px] object-contain" src="{{ asset('images/logo.png') }}" alt="Logo">
-					</a>
+					<div class="flex justify-start items-center overflow-hidden header-logo">
+						<a title="Logo" href="{{ home_url('/') }}">
+						    <img id="logo-img" alt="Logo" src="{{ asset('images/logo.png') }}" loading="lazy" class="img-fluid">
+						</a>
+						<div class="flex flex-col" style="margin-top:-3px">
+						    <a class="logo" href="{{ home_url('/') }}">
+						        <strong class="brand-name relative">
+						            <span class="br-1">Vì</span>
+						            <span class="br-2">Gia đình</span>
+						            <span class="br-3 absolute">.com.vn</span>
+						        </strong>
+						    </a>
+						    <div href="{{ home_url('/') }}" class="logo hidden">
+						        <strong class="brand-name p-0">
+						            <span class="br-">Trang thông tin điện tử tổng hợp</span>
+						        </strong>
+						    </div>
+						    <div href="{{ home_url('/') }}" class="logo slg-actd absolute" style="bottom: 10px">
+						        <span class="slogan-actd">quảng bá nông sản, văn hóa, du lịch...</span>
+						    </div>
+						</div>					
+					</div>
+
 					@include('partials.search-form')
 
 					<div class="flex items-center flex-row">
