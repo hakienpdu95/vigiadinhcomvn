@@ -4,7 +4,6 @@
     </x-alert>
 @else
     <div class="mb-[20px]">
-      <span class="text-lg font-bold spline-sans leading-7 mb-2.5 block">{!! __('Bài viết mới nhất', 'sage') !!}</span>
       <div class="w-full h-[2px] bg-[#6697a1]"></div>
     </div>
     <div id="posts-grid" class="grid grid-cols-1 gap-y-3 pb-6">

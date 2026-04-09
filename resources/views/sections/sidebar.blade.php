@@ -9,6 +9,10 @@ $query = \App\Queries\MergedPostsQuery::breaking(6, ['post', 'event']);
     'query' => $query 
 ])
 
+@php 
+$post_trending = \App\Queries\MergedPostsQuery::latest(); 
+@endphp
+
 <div class="widget box mb-3 widget-posts blogsidebar3widget type-2">
     <div class="box-title widget-title mb-3 style_5">
         <div class="m-0 main-title">
@@ -16,36 +20,26 @@ $query = \App\Queries\MergedPostsQuery::breaking(6, ['post', 'event']);
         </div>
     </div>
     <div class="box-body widget-content">
+        @while ($post_trending->have_posts())
+        @php $post_trending->the_post(); @endphp
         <div class="item">
-            <a href="https://vntravel.org.vn/road-trip-viet-nam-2026-vi-sao-mua-xuan-la-thoi-diem-ly-tuong-nhat-a8347.html" title="Road Trip Việt Nam 2026: Vì sao mùa xuân là thời điểm lý tưởng nhất?" class="!flex !no-underline style_img_left mb-4">
+            {!! sage_post_link_open(get_post(), '!flex justify-between items-center !no-underline style_img_left mb-4', 'post-story-home') !!}
                 <div class="image image-wrapper mr-3">
                     <div class="image image-medium relative overflow-hidden block no-underline">
-                        <img class="w-full min-h-full max-h-full !h-[67px] absolute top-0 left-0 object-cover" src="https://vntravel.org.vn/uploads/images/blog/haingan116/2026/03/19/img-2710-1773905362.jpg" alt="Road Trip Việt Nam 2026: Vì sao mùa xuân là thời điểm lý tưởng nhất?">
+                        {!! sage_thumbnail('thumb-medium', [
+                                'class' => 'w-full min-h-full max-h-full !h-[67px] absolute top-0 left-0 object-cover'
+                            ], get_post()) !!}
                     </div>
                 </div>
                 <div class="info-wrapper">
-                    <h3 class="article-title clamp-4-lines"> Road Trip Việt Nam 2026: Vì sao mùa xuân là thời điểm lý tưởng nhất? </h3>
-                    <div class="meta-news">
+                    <h3 class="article-title clamp-4-lines"> {!! get_the_title(get_post()) !!} </h3>
+                    <div class="meta-news hidden">
                         <span class="author-meta">Trần Như Hải Ngân</span>
                     </div>
                 </div>
-            </a>
+            {!! sage_post_link_close() !!}
         </div>
-        <div class="item">
-            <a href="https://vntravel.org.vn/k-home-bai-toan-song-tien-nghi-nhung-van-tiet-kiem-a8345.html" title="K-Home: bài toán sống tiện nghi nhưng vẫn tiết kiệm" class="!flex !no-underline style_img_left mb-4">
-                <div class="image image-wrapper mr-3">
-                    <div class="image image-medium relative overflow-hidden block no-underline">
-                        <img class="w-full min-h-full max-h-full !h-[67px] absolute top-0 left-0 object-cover" src="https://vntravel.org.vn/uploads/images/blog/lethytheu/2026/03/19/1-1773888845.png" alt="K-Home: bài toán sống tiện nghi nhưng vẫn tiết kiệm">
-                    </div>
-                </div>
-                <div class="info-wrapper">
-                    <h3 class="article-title clamp-4-lines"> K-Home: bài toán sống tiện nghi nhưng vẫn tiết kiệm </h3>
-                    <div class="meta-news">
-                        <span class="author-meta">Lê Thy Thêu</span>
-                    </div>
-                </div>
-            </a>
-        </div>
+        @endwhile
     </div>
 </div>
 
@@ -70,34 +64,19 @@ $query = \App\Queries\MergedPostsQuery::breaking(6, ['post', 'event']);
                 </div>
             </div>
         </div>
+
+        @while ($post_trending->have_posts())
+        @php $post_trending->the_post(); @endphp
         <div class="sub-news-cate">
             <div class="item">
                 <h3>
-                    <a href="https://doanhnghiepkinhtexanh.vn/ha-tinh-nuoc-mam-tu-lang-bien-ky-xuan-vuon-tam-san-pham-ocop-5-sao-a45861.html" title="Nước mắm từ làng biển Kỳ Xuân vươn tầm sản phẩm OCOP 5 sao"> Nước mắm từ làng biển Kỳ Xuân vươn tầm sản phẩm OCOP 5 sao </a>
+                    {!! sage_post_link_open(get_post()) !!}
+                        {!! get_the_title(get_post()) !!}
+                    {!! sage_post_link_close() !!}
                 </h3>
             </div>
         </div>
-        <div class="sub-news-cate">
-            <div class="item">
-                <h3>
-                    <a href="https://doanhnghiepkinhtexanh.vn/vu-sua-hoang-kim-dac-san-miet-vuon-nam-bo-a45637.html" title="Vú sữa Hoàng Kim đặc sản miệt vườn Nam bộ"> Vú sữa Hoàng Kim đặc sản miệt vườn Nam bộ </a>
-                </h3>
-            </div>
-        </div>
-        <div class="sub-news-cate">
-            <div class="item">
-                <h3>
-                    <a href="https://doanhnghiepkinhtexanh.vn/chuong-trinh-moi-xa-mot-san-pham-ocop-giup-nang-cao-gia-tri-san-pham-va-thuc-day-kinh-te-nong-thon-tai-hue-a45209.html" title="Chương trình &quot;Mỗi xã một sản phẩm&quot; OCOP giúp nâng cao giá trị sản phẩm và thúc đẩy kinh tế nông thôn tại Huế"> Chương trình "Mỗi xã một sản phẩm" OCOP giúp nâng cao giá trị sản phẩm và thúc đẩy kinh tế nông thôn tại Huế </a>
-                </h3>
-            </div>
-        </div>
-        <div class="sub-news-cate">
-            <div class="item">
-                <h3>
-                    <a href="https://doanhnghiepkinhtexanh.vn/thuong-thuc-mang-rung-da-bac-dan-da-ma-dam-da-a45118.html" title="Thưởng thức măng rừng Đà Bắc Dân dã mà đậm đà"> Thưởng thức măng rừng Đà Bắc Dân dã mà đậm đà </a>
-                </h3>
-            </div>
-        </div>
+        @endwhile
     </div>
 </div>
 
@@ -109,48 +88,23 @@ $query = \App\Queries\MergedPostsQuery::breaking(6, ['post', 'event']);
         <div class="c-box__content">
             <div class="c-news-topread">
                 <ul>
+                    @while ($post_trending->have_posts())
+                    @php $post_trending->the_post(); @endphp
                     <li>
                         <div class="c-news-topread__number">
-                            <span>1</span>
+                            <span>{{ $post_trending->current_post + 1 }}</span>
                         </div>
                         <h3 class="c-news-topread__title">
-                            <a title="Ông Trump đổ lỗi cho Bộ trưởng Hegseth về cuộc chiến với Iran" href="https://congluan.vn/ong-trump-do-loi-cho-bo-truong-hegseth-ve-cuoc-chien-voi-iran-10335595.html">Ông Trump đổ lỗi cho Bộ trưởng Hegseth về cuộc chiến với Iran</a>
+                            {!! sage_post_link_open(get_post()) !!}
+                                {!! get_the_title(get_post()) !!}
+                            {!! sage_post_link_close() !!}
                         </h3>
                     </li>
-                    <li>
-                        <div class="c-news-topread__number">
-                            <span>2</span>
-                        </div>
-                        <h3 class="c-news-topread__title">
-                            <a title="Giá vàng 9h sáng nay 25/3/2026: Bật tăng mạnh mẽ" href="https://congluan.vn/gia-vang-9h-sang-nay-25-3-2026-bat-tang-manh-me-10335703.html">Giá vàng 9h sáng nay 25/3/2026: Bật tăng mạnh mẽ</a>
-                        </h3>
-                    </li>
-                    <li>
-                        <div class="c-news-topread__number">
-                            <span>3</span>
-                        </div>
-                        <h3 class="c-news-topread__title">
-                            <a title="Giá vàng chiều nay 23/3/2026: Thế giới mất 305 USD/ounce, vàng SJC ‘lao dốc không phanh’" href="https://congluan.vn/gia-vang-chieu-nay-23-3-2026-the-gioi-mat-305-usd-ounce-vang-sjc-lao-doc-khong-phanh-10335479.html">Giá vàng chiều nay 23/3/2026: Thế giới mất 305 USD/ounce, vàng SJC ‘lao dốc không phanh’</a>
-                        </h3>
-                    </li>
-                    <li>
-                        <div class="c-news-topread__number">
-                            <span>4</span>
-                        </div>
-                        <h3 class="c-news-topread__title">
-                            <a title="Từ ngày 1/4, hàng không Việt Nam tạm dừng khai thác nhiều đường bay" href="https://congluan.vn/tu-ngay-1-4-hang-khong-viet-nam-tam-dung-khai-thac-nhieu-duong-bay-10335573.html">Từ ngày 1/4, hàng không Việt Nam tạm dừng khai thác nhiều đường bay</a>
-                        </h3>
-                    </li>
-                    <li>
-                        <div class="c-news-topread__number">
-                            <span>5</span>
-                        </div>
-                        <h3 class="c-news-topread__title">
-                            <a title="Chiến tranh và lạm phát không còn cứu được giá vàng" href="https://congluan.vn/chien-tranh-va-lam-phat-khong-con-cuu-duoc-gia-vang-10335439.html">Chiến tranh và lạm phát không còn cứu được giá vàng</a>
-                        </h3>
-                    </li>
+                    @endwhile
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+@php wp_reset_postdata(); @endphp
