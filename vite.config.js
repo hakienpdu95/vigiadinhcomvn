@@ -6,7 +6,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 
 export default defineConfig({
-  base: '/wp-content/themes/anpro/public/build/',
+  base: '/wp-content/themes/vigiadinhcomvn/public/build/',
   resolve: {
       alias: {
           '@': path.resolve(__dirname, 'resources'),

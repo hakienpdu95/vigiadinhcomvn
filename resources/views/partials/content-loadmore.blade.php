@@ -2,7 +2,7 @@
     <div class="blog-single-item">
         <div class="flex items-start flex-col lg:flex-row gap-3">
             <!-- Thumbnail (giữ sage_thumbnail → có placeholder tự động) -->
-            <div class="sm:w-[315px] w-full sm:h-[165px] h-[205px] blog-single-item-thumbnail overflow-hidden">
+            <div class="sm:w-[240px] w-[160px] sm:h-[144px] h-[96px] blog-single-item-thumbnail overflow-hidden">
                 {!! sage_post_link_open(get_post(), 'block w-full h-full', 'listing') !!}
                 {!! sage_thumbnail('thumb-medium') !!}
                 {!! sage_post_link_close() !!}
