@@ -1,50 +1,79 @@
+<div class="before-footer">
+    <section class="call-to-action">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-12 gap-3">
+                <div class="col-span-12 sm:col-span-6">
+                    <div class="flex justify-start items-center">
+                        <a href="https://doanhnghiepkinhtexanh.vn/lien-he" class="icon-box-wrapper">
+                            <div class="icon-box-icon">
+                                <span class="elementor-icon elementor-animation-">
+                                    <i class="hgi hgi-stroke hgi-mail-01"></i>
+                                </span>
+                            </div>
+                            <div class="icon-box-content">
+                                <h4 class="main-title icon-box-title">
+                                    <span>Góp ý nội dung</span>
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <div class="action-content-right">
+                        <div class="title-wraper">
+                            <h4 class="main-title">Hợp tác truyền thông, quảng cáo</h4>
+                        </div>
+                        <a href="tel:098.110.7395" class="btn btn-primary btn-action">
+                            <i class="far fa-paper-plane"></i> 098.110.7395 </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 <footer id="footer" class=" mt-10">
-    <div class="footer-main bg-[#6697a1] text-white px-3 py-10">
+    <div class="footer-main px-3 py-10">
         <div class="container mx-auto">
             <div class="grid grid-cols-12 gap-5">
 
-                <div class="col-span-12 sm:col-span-5">
-                    <h3 class="text-white text-2xl font-semibold tracking-tight mb-4">Vì Gia Đình</h3>
-                    <p>Chuyên trang quảng bá du lịch nông thôn trên website du lịch quốc gia của Cục Du lịch Quốc gia Việt Nam</p>
-
-                    <div class="social">
-                        <ul class="social_icons shape_square style_default size_medium color_text inline-block">
-                            <li class="w-socials-item facebook inline-block px-2 px-2">
-                                <a class="sc_facebook inline-flex w-8 h-8 items-center justify-center text-lg overflow-hidden" title="Facebook" href="https://www.facebook.com/vntravelmagazine" target="_blank" rel="noopener, nofollow">
-                                    <i class="text-[26px] leading-[1.5] hgi hgi-stroke hgi-facebook-01"></i>
-                                </a>
-                            </li>
-                            <li class="w-socials-item instagram inline-block px-2 px-2">
-                                <a class="sc_instagram inline-flex w-8 h-8 items-center justify-center text-lg overflow-hidden" title="Instagram" href="https://www.instagram.com/vietnamtravel.magazine/?hl=en" target="_blank" rel="noopener, nofollow">
-                                    <i class="text-[26px] leading-[1.5] hgi hgi-stroke hgi-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="w-socials-item youtube inline-block px-2 px-2">
-                                <a class="sc_youtube inline-flex w-8 h-8 items-center justify-center text-lg overflow-hidden" title="Youtube" href="https://www.youtube.com/@vietnamtravelmagazine" target="_blank" rel="noopener, nofollow">
-                                    <i class="text-[26px] leading-[1.5] hgi hgi-stroke hgi-youtube"></i>
-                                </a>
-                            </li>
-                            <li class="w-socials-item zalo inline-block px-2 px-2">
-                                <a class="sc_zalo inline-flex w-8 h-8 items-center justify-center text-lg overflow-hidden" href="https://zalo.me/2931844857685153421" target="_blank" rel="noopener, nofollow">
-                                    <i class="icon-social-zalo" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li class="w-socials-item rss inline-block px-2 px-2">
-                                <a class="sc_rss inline-flex w-8 h-8 items-center justify-center text-lg overflow-hidden" title="Rss" href="/rss.html" target="_blank" rel="noopener">
-                                    <i class="text-[26px] leading-[1.5] hgi hgi-stroke hgi-rss"></i>
-                                </a>
-                            </li>
-                        </ul>
+                <div class="col-span-12 sm:col-span-6">
+                    <div class="flex justify-start items-center overflow-hidden header-logo relative">
+                        <a title="Logo" href="{{ home_url('/') }}" class="logo-link">
+                            <img id="logo-img" alt="Logo" src="{{ asset('images/logo.png') }}" loading="lazy" class="img-fluid">
+                        </a>
+                        <div class="flex flex-col" style="margin-top:-3px">
+                            <a class="logo" href="{{ home_url('/') }}">
+                                <strong class="brand-name relative">
+                                    <span class="br-1">Vì</span>
+                                    <span class="br-2">Gia đình</span>
+                                    <span class="br-3 absolute">.com.vn</span>
+                                </strong>
+                            </a>
+                            <div href="{{ home_url('/') }}" class="logo slg-actd absolute" style="bottom: -4px">
+                                <span class="slogan-actd">quảng bá nông sản, văn hóa, du lịch...</span>
+                            </div>
+                        </div>                  
                     </div>
+                    <p class="mt-5 sm:w-[80%]">soctrangtourism.vn là website cung cấp thông tin về du lịch Sóc Trăng, nơi giới thiệu các điểm tham quan, văn hóa, ẩm thực và trải nghiệm đặc sắc của vùng đất này. Ngoài ra còn các kiến thức liên quan đến ngành du lịch.</p>
                 </div>
-
 
                 {!! sage_footer_column('footer_column_1') !!}
 
-                {!! sage_footer_column('footer_column_2') !!}
-
                 <div class="col-span-12 sm:col-span-3">
-                    <a href="#" class="block text-white font-semibold hover:text-emerald-400 mb-4">Liên hệ</a>
+                    <h3 class="block mb-4">Liên hệ</h3>
+                    <p>
+                        <strong>Địa chỉ:</strong> Khu tập thể Hậu Cần, xã Phúc Thịnh, TP. Hà Nội
+                    </p>
+                    <p>
+                        <strong>Hotline</strong> 098 110 7395
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:dohakien395@gmail.com">dohakien395@gmail.com</a>
+                    </p>
+                    <p>
+                        <strong>Giờ Làm Việc:</strong>: Thứ 2 – Chủ Nhật (08:00 – 17:00)
+                    </p>
                 </div>
             </div>
         </div>        
