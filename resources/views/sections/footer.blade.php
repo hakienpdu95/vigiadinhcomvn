@@ -1,17 +1,17 @@
 <div class="before-footer">
-    <section class="call-to-action">
+    <section class="call-to-action text-white">
         <div class="container mx-auto">
             <div class="grid grid-cols-12 gap-3">
                 <div class="col-span-12 sm:col-span-6">
                     <div class="flex justify-start items-center">
-                        <a href="https://doanhnghiepkinhtexanh.vn/lien-he" class="icon-box-wrapper">
+                        <a href="https://doanhnghiepkinhtexanh.vn/lien-he" class="icon-box-wrapper flex text-left flex-row items-center">
                             <div class="icon-box-icon">
                                 <span class="elementor-icon elementor-animation-">
                                     <i class="hgi hgi-stroke hgi-mail-01"></i>
                                 </span>
                             </div>
                             <div class="icon-box-content">
-                                <h4 class="main-title icon-box-title">
+                                <h4 class="main-title icon-box-title !mb-0">
                                     <span>Góp ý nội dung</span>
                                 </h4>
                             </div>
@@ -19,9 +19,9 @@
                     </div>
                 </div>
                 <div class="col-span-12 sm:col-span-6">
-                    <div class="action-content-right">
+                    <div class="action-content-right flex items-center justify-end flex-1">
                         <div class="title-wraper">
-                            <h4 class="main-title">Hợp tác truyền thông, quảng cáo</h4>
+                            <h4 class="main-title !mb-0">Hợp tác truyền thông, quảng cáo</h4>
                         </div>
                         <a href="tel:098.110.7395" class="btn btn-primary btn-action">
                             <i class="far fa-paper-plane"></i> 098.110.7395 </a>
@@ -59,7 +59,7 @@
 
                 {!! sage_footer_column('footer_column_1') !!}
 
-                <div class="col-span-12 sm:col-span-3">
+                <div class="col-span-12 sm:col-span-3 footer-contact">
                     <h3 class="block mb-4">Liên hệ</h3>
                     <p>
                         <strong>Địa chỉ:</strong> Khu tập thể Hậu Cần, xã Phúc Thịnh, TP. Hà Nội

@@ -25,7 +25,9 @@ a:not([href]):not([class]),a:not([href]):not([class]):hover {
   color: inherit;
   text-decoration-line: none;
 }
-
+a:where(:not(.wp-element-button)) {
+  text-decoration: none !important;
+}
 pre {
     max-width: 100%;
     margin: 15px 0;
