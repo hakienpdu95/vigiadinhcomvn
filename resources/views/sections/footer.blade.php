@@ -7,7 +7,7 @@
                         <a href="https://doanhnghiepkinhtexanh.vn/lien-he" class="icon-box-wrapper flex text-left flex-row items-center">
                             <div class="icon-box-icon">
                                 <span class="elementor-icon elementor-animation-">
-                                    <i class="hgi hgi-stroke hgi-mail-01"></i>
+                                    <i class="fa-sharp fa-solid fa-envelope"></i>
                                 </span>
                             </div>
                             <div class="icon-box-content">
@@ -24,7 +24,7 @@
                             <h4 class="main-title !mb-0">Hợp tác truyền thông, quảng cáo</h4>
                         </div>
                         <a href="tel:098.110.7395" class="btn btn-primary btn-action">
-                            <i class="far fa-paper-plane"></i> 098.110.7395 </a>
+                            <i class="fa-sharp-duotone fa-light fa-paper-plane mr-1"></i> 098.110.7395 </a>
                     </div>
                 </div>
             </div>

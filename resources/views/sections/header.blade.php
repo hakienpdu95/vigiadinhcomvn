@@ -33,7 +33,7 @@
 							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="RSS">
 								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
 									<div class="info-box-icon text-[#00438A] text-[30px]">
-										<i class="hgi hgi-stroke hgi-rss text-2xl"></i>
+										<i class="fa-sharp fa-regular fa-rss"></i>
 									</div>
 								</div>
 							</a>
@@ -41,7 +41,7 @@
 							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="Facebook">
 								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
 									<div class="info-box-icon text-[#00438A] text-[30px]">
-										<i class="hgi hgi-stroke hgi-facebook-01 text-2xl"></i>
+										<i class="fa-brands fa-facebook"></i>
 									</div>
 								</div>
 							</a>
@@ -49,13 +49,13 @@
 							<a class="!no-underline flex flex-row items-stretch px-[10px]" href="#" target="_blank" title="Youtube">
 								<div class="header-icon relative flex flex-none items-center justify-center leading-[0]">
 									<div class="info-box-icon text-[#00438A] text-[30px]">
-										<i class="hgi hgi-stroke hgi-youtube text-2xl"></i>
+										<i class="fa-brands fa-youtube"></i>
 									</div>
 								</div>
 							</a>
 
 							<div class="item type-button flex flex-row items-stretch px-[10px]">
-								<a href="#" target="_blank" class="bg-[#00438A] border border-[#00438A] !no-underline !text-white text-sm font-normal inline-block text-center px-3 py-1.5 min-w-[90px] rounded-[50px] cursor-pointer transition duration-150 ease-in-out leading-normal">Đăng ký</a>
+								<a href="#" target="_blank" class="bg-[#00438A] border border-[#00438A] !no-underline !text-white text-sm font-normal inline-block text-center px-3 py-1.5 min-w-[90px] rounded-[50px] cursor-pointer transition duration-150 ease-in-out leading-normal"><i class="fa-sharp fa-light fa-hexagon-plus mr-2"></i>Sản phẩm quảng cáo</a>
 							</div>
 						</div>
 					</div>
