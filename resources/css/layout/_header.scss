@@ -87,11 +87,25 @@
 
     #logo-img {
         width: 70px;
-        height: 70px;
         transition: all 0.2s ease;
     }
 }
 
+.header-mobile,
+.header-sidebar-mobile {
+    #logo-img {
+      width: 60px;
+    }
+
+    a.logo-link {
+      margin-right: 2px;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 500;
+    }
+}
 
 @-webkit-keyframes stuckMoveDown {
     0% {
